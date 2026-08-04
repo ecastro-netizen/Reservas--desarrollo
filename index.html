@@ -5,10 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sistema de Reserva de Laboratorios | Colegio Concepción Los Acacios</title>
 <style>
+:root {
+    --current-theme: #1e3a5f;
+    --current-theme-light: rgba(30, 58, 95, 0.1);
+}
+
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #eef3f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
+    color: #333;
 }
 
 /* BANNER SUPERIOR CON IMAGEN DE FACHADA */
@@ -25,7 +31,7 @@ body {
 .banner-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .banner-title {
@@ -33,9 +39,9 @@ body {
     z-index: 1;
     color: #ffffff;
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     margin: 0;
     padding: 0 15px;
 }
@@ -44,11 +50,11 @@ body {
 header {
     background: linear-gradient(90deg, #1e3a5f, #2b7cff);
     color: #fff;
-    padding: 15px 20px;
+    padding: 15px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .header-brand {
@@ -59,116 +65,166 @@ header {
 
 .logo {
     height: 60px;
+    object-fit: contain;
 }
 
 header h2 {
     margin: 0;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 #clock {
     font-size: 0.95rem;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
     border-radius: 20px;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(5px);
+    font-weight: 500;
 }
 
 /* CONTENEDOR PRINCIPAL */
 .wrap {
     max-width: 1300px;
     margin: auto;
-    padding: 20px;
+    padding: 25px 20px;
 }
 
 /* BOTONES DE CAMBIO DE MODO */
 .view-toggle {
     display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
 .toggle-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    background: #dbe4f0;
-    color: #1e3a5f;
-    font-weight: 600;
+    padding: 12px 24px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: #e2e8f0;
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .toggle-btn.active {
-    background: #1e3a5f;
+    background: var(--current-theme);
     color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.mode-desc {
+    font-size: 1rem;
+    color: #475569;
+    margin-bottom: 15px;
+    font-weight: 500;
 }
 
 /* TARJETAS DE SELECCIÓN DE LABORATORIOS */
 .cards {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     flex-wrap: wrap;
-    margin: 15px 0;
+    margin-bottom: 20px;
 }
 
 .card {
     flex: 1;
-    min-width: 220px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 18px;
+    min-width: 240px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,.15);
-    border: 3px solid transparent;
-    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+    border: 3px solid #e2e8f0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+    transition: color 0.3s;
+}
+
+.card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.9rem;
 }
 
 .card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.1);
 }
 
-.card.active {
-    border-color: #2b7cff;
+/* Estilos dinámicos cuando la tarjeta está ACTIVA */
+.card[data-lab="lab101"].active {
+    border-color: #1e3a5f;
+    box-shadow: 0 6px 20px rgba(30, 58, 95, 0.25);
+    background: linear-gradient(180deg, #ffffff 80%, rgba(30, 58, 95, 0.05) 100%);
 }
+.card[data-lab="lab101"].active h3 { color: #1e3a5f; }
 
+.card[data-lab="lab102"].active {
+    border-color: #10b981;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+    background: linear-gradient(180deg, #ffffff 80%, rgba(16, 185, 129, 0.05) 100%);
+}
+.card[data-lab="lab102"].active h3 { color: #10b981; }
+
+.card[data-lab="lab201"].active {
+    border-color: #f59e0b;
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.25);
+    background: linear-gradient(180deg, #ffffff 80%, rgba(245, 158, 11, 0.05) 100%);
+}
+.card[data-lab="lab201"].active h3 { color: #d97706; }
+
+/* CAJA DE INFORMACIÓN DEL LAB SELECCIONADO */
 .info {
-    background: #fff;
-    padding: 15px;
+    background: #ffffff;
+    padding: 16px 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,.1);
-    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+    margin-bottom: 20px;
+    border-left: 6px solid var(--current-theme);
+    transition: border-color 0.3s ease;
 }
 
 .notice {
     display: none;
-    background: #fff3cd;
-    color: #7a5200;
-    padding: 12px;
-    border-left: 5px solid #ffc107;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    background: #fffbeb;
+    color: #b45309;
+    padding: 14px;
+    border-left: 6px solid #f59e0b;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 iframe {
     width: 100%;
-    height: 700px;
+    height: 720px;
     border: 0;
-    border-radius: 12px;
+    border-radius: 14px;
     background: #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
 }
 
 footer {
     text-align: center;
-    padding: 20px;
-    color: #555;
+    padding: 25px;
+    color: #64748b;
+    font-weight: 500;
 }
 
 @media (max-width: 600px) {
-    .banner-top { height: 120px; }
+    .banner-top { height: 130px; }
     .banner-title { font-size: 1.2rem; }
-    header { flex-direction: column; gap: 10px; text-align: center; }
+    header { flex-direction: column; gap: 12px; text-align: center; }
     .header-brand { flex-direction: column; }
     .view-toggle { flex-direction: column; }
 }
@@ -198,18 +254,19 @@ footer {
         <button id="btn-agenda" class="toggle-btn" onclick="switchMode('agenda')">📋 Ver Reservas Agendadas</button>
     </div>
 
-    <p id="mode-description">Seleccione un laboratorio para realizar una reserva.</p>
+    <div class="mode-desc" id="mode-description">Seleccione un laboratorio para realizar una reserva:</div>
     
+    <!-- TARJETAS DE LABORATORIOS -->
     <div class="cards">
-        <div class="card active" onclick="selectLab('lab101', this)">
+        <div class="card active" data-lab="lab101" onclick="selectLab('lab101', this)">
             <h3>🖥 Lab -101</h3>
             <p>Frente a Informática</p>
         </div>
-        <div class="card" onclick="selectLab('lab102', this)">
+        <div class="card" data-lab="lab102" onclick="selectLab('lab102', this)">
             <h3>🖥 Lab -102</h3>
             <p>Al frente de Informática</p>
         </div>
-        <div class="card" onclick="selectLab('lab201', this)">
+        <div class="card" data-lab="lab201" onclick="selectLab('lab201', this)">
             <h3>🧒 Lab 201</h3>
             <p>Prebásica</p>
         </div>
@@ -229,6 +286,7 @@ const labsConfig = {
     lab101: {
         title: "Laboratorio -101",
         location: "Frente a Informática",
+        color: "#1e3a5f",
         warning: false,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1yijX3eqzE4lBD7uVmn_9uvflj-KlsZuXv8FAbq40IMhItIckp2FtP8kNHfnImLWlcLBQbE4GV?gv=true",
         agendaUrl: "https://calendar.google.com/calendar/embed?src=c_ca9d8af8774116818857cd9b32f6a9c8407ce014f27be3981b78ee54d537186a%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK"
@@ -236,6 +294,7 @@ const labsConfig = {
     lab102: {
         title: "Laboratorio -102",
         location: "Al frente de Informática",
+        color: "#10b981",
         warning: false,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true",
         agendaUrl: "https://calendar.google.com/calendar/embed?src=c_classroom6390a534%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK"
@@ -243,6 +302,7 @@ const labsConfig = {
     lab201: {
         title: "Laboratorio 201",
         location: "Prebásica",
+        color: "#f59e0b",
         warning: true,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true",
         agendaUrl: "https://calendar.google.com/calendar/embed?src=coemco.cl_g8t7m0k3n4lmut0mi4vlinsbmk%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK"
@@ -254,13 +314,18 @@ let currentMode = 'booking';
 
 function selectLab(labId, cardElement) {
     currentLab = labId;
+    const config = labsConfig[labId];
+
+    // Cambiar la variable CSS para adaptar los colores dinámicamente
+    document.documentElement.style.setProperty('--current-theme', config.color);
     
+    // Activar tarjeta
     document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
     cardElement.classList.add('active');
 
-    const config = labsConfig[labId];
+    // Mostrar aviso y detalles
     document.getElementById('notice').style.display = config.warning ? 'block' : 'none';
-    document.getElementById('labinfo').innerHTML = `<b>${config.title}</b><br>📍 ${config.location}`;
+    document.getElementById('labinfo').innerHTML = `<strong style="color:${config.color}; font-size:1.1rem;">${config.title}</strong><br>📍 ${config.location}`;
 
     updateIframe();
 }
@@ -273,7 +338,7 @@ function switchMode(mode) {
 
     const desc = document.getElementById('mode-description');
     if (mode === 'booking') {
-        desc.textContent = "Seleccione un laboratorio para realizar una reserva.";
+        desc.textContent = "Seleccione un laboratorio para tomar un horario disponible:";
     } else {
         desc.textContent = "Consulte la disponibilidad semanal y las reservas realizadas:";
     }

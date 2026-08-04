@@ -11,7 +11,7 @@ body {
     background: #eef3f8;
 }
 
-/* BANNER CON IMAGEN DE FACHADA Y TEXTO SOBREPUESTO */
+/* BANNER CON IMAGEN DE FACHADA */
 .banner-top {
     position: relative;
     width: 100%;
@@ -40,7 +40,7 @@ body {
     padding: 0 15px;
 }
 
-/* BARRA DEL NAVEGADOR PRINCIPAL Y LOGO */
+/* CABECERA Y LOGO */
 header {
     background: linear-gradient(90deg, #1e3a5f, #2b7cff);
     color: #fff;
@@ -74,18 +74,41 @@ header h2 {
     backdrop-filter: blur(4px);
 }
 
-/* CONTENEDOR CENTRAL */
 .wrap {
     max-width: 1300px;
     margin: auto;
     padding: 20px;
 }
 
+/* BOTONES DE CAMBIO DE MODO (RESERVAR VS VER AGENDA) */
+.view-toggle {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.toggle-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #dbe4f0;
+    color: #1e3a5f;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-btn.active {
+    background: #1e3a5f;
+    color: #ffffff;
+}
+
+/* TARJETAS DE LABORATORIOS */
 .cards {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .card {
@@ -146,18 +169,17 @@ footer {
     .banner-title { font-size: 1.2rem; }
     header { flex-direction: column; gap: 10px; text-align: center; }
     .header-brand { flex-direction: column; }
+    .view-toggle { flex-direction: column; }
 }
 </style>
 </head>
 <body>
 
-<!-- BANNER SUPERIOR CON LA FOTO -->
 <div class="banner-top">
     <div class="banner-overlay"></div>
     <h1 class="banner-title">Bienvenidos al Sistema de Reserva de Laboratorios</h1>
 </div>
 
-<!-- CABECERA CON EL LOGO Y HORA -->
 <header>
     <div class="header-brand">
         <img src="logo.png" class="logo" alt="Logo Colegio Concepción Los Acacios">
@@ -167,18 +189,24 @@ footer {
 </header>
 
 <div class="wrap">
-    <p>Seleccione un laboratorio para realizar una reserva.</p>
+    <!-- PESTAÑAS PARA CAMBIAR MODOS -->
+    <div class="view-toggle">
+        <button id="btn-booking" class="toggle-btn active" onclick="switchMode('booking')">📅 Agendar Cita</button>
+        <button id="btn-agenda" class="toggle-btn" onclick="switchMode('agenda')">📋 Ver Reservas Agendadas</button>
+    </div>
+
+    <p id="mode-description">Seleccione un laboratorio para tomar un horario disponible:</p>
     
     <div class="cards">
-        <div class="card active" onclick="showLab('lab101',this,false)">
+        <div class="card active" onclick="selectLab('lab101', this)">
             <h3>🖥 Lab -101</h3>
             <p>Frente a Informática</p>
         </div>
-        <div class="card" onclick="showLab('lab102',this,false)">
+        <div class="card" onclick="selectLab('lab102', this)">
             <h3>🖥 Lab -102</h3>
             <p>Al frente de Informática</p>
         </div>
-        <div class="card" onclick="showLab('lab201',this,true)">
+        <div class="card" onclick="selectLab('lab201', this)">
             <h3>🧒 Lab 201</h3>
             <p>Prebásica</p>
         </div>
@@ -187,40 +215,91 @@ footer {
     <div id="notice" class="notice">⚠️ Este laboratorio es exclusivo para estudiantes de 1° a 4° básico.</div>
     <div class="info" id="labinfo"></div>
 
-    <div id="lab101">
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1yijX3eqzE4lBD7uVmn_9uvflj-KlsZuXv8FAbq40IMhItIckp2FtP8kNHfnImLWlcLBQbE4GV?gv=true"></iframe>
-    </div>
-    <div id="lab102" style="display:none">
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true"></iframe>
-    </div>
-    <div id="lab201" style="display:none">
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true"></iframe>
-    </div>
+    <iframe id="main-iframe" src=""></iframe>
 </div>
 
 <footer>Departamento de Informática - Colegio Concepción Los Acacios</footer>
 
 <script>
-const infos = {
-    lab101: "<b>Laboratorio -101</b><br>📍 Frente a Informática",
-    lab102: "<b>Laboratorio -102</b><br>📍 Frente a Informática",
-    lab201: "<b>Laboratorio 201</b><br>📍 Prebásica"
+// CONFIGURACIÓN DE LOS LABORATORIOS (URLs de reserva y pública)
+// Reemplaza 'ID_CALENDARIO_XXX' por el ID/Email real del calendario si tienes la vista pública habilitada.
+const labsConfig = {
+    lab101: {
+        title: "Laboratorio -101",
+        location: "Frente a Informática",
+        warning: false,
+        bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1yijX3eqzE4lBD7uVmn_9uvflj-KlsZuXv8FAbq40IMhItIckp2FtP8kNHfnImLWlcLBQbE4GV?gv=true",
+        agendaUrl: "https://calendar.google.com/calendar/embed?src=ID_CALENDARIO_LAB101&ctz=America%2FSantiago&mode=WEEK"
+    },
+    lab102: {
+        title: "Laboratorio -102",
+        location: "Al frente de Informática",
+        warning: false,
+        bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true",
+        agendaUrl: "https://calendar.google.com/calendar/embed?src=ID_CALENDARIO_LAB102&ctz=America%2FSantiago&mode=WEEK"
+    },
+    lab201: {
+        title: "Laboratorio 201",
+        location: "Prebásica",
+        warning: true,
+        bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true",
+        agendaUrl: "https://calendar.google.com/calendar/embed?src=ID_CALENDARIO_LAB201&ctz=America%2FSantiago&mode=WEEK"
+    }
 };
 
-function showLab(id, el, w) {
-    ["lab101", "lab102", "lab201"].forEach(x => document.getElementById(x).style.display = "none");
-    document.getElementById(id).style.display = "block";
-    document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
-    el.classList.add("active");
-    document.getElementById("notice").style.display = w ? "block" : "none";
-    document.getElementById("labinfo").innerHTML = infos[id];
+let currentLab = 'lab101';
+let currentMode = 'booking'; // 'booking' o 'agenda'
+
+function selectLab(labId, cardElement) {
+    currentLab = labId;
+    
+    // Actualizar estilo visual de las tarjetas
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    cardElement.classList.add('active');
+
+    // Mostrar aviso si corresponde
+    const config = labsConfig[labId];
+    document.getElementById('notice').style.display = config.warning ? 'block' : 'none';
+    document.getElementById('labinfo').innerHTML = `<b>${config.title}</b><br>📍 ${config.location}`;
+
+    updateIframe();
 }
 
-showLab('lab101', document.querySelector('.card'), false);
+function switchMode(mode) {
+    currentMode = mode;
 
-setInterval(() => {
-    document.getElementById("clock").textContent = new Date().toLocaleString("es-CL");
-}, 1000);
+    // Cambiar estado visual de los botones de modo
+    document.getElementById('btn-booking').classList.toggle('active', mode === 'booking');
+    document.getElementById('btn-agenda').classList.toggle('active', mode === 'agenda');
+
+    const desc = document.getElementById('mode-description');
+    if (mode === 'booking') {
+        desc.textContent = "Seleccione un laboratorio para tomar un horario disponible:";
+    } else {
+        desc.textContent = "Consulte el calendario semanal de reservas realizadas:";
+    }
+
+    updateIframe();
+}
+
+function updateIframe() {
+    const config = labsConfig[currentLab];
+    const iframe = document.getElementById('main-iframe');
+    const targetUrl = (currentMode === 'booking') ? config.bookingUrl : config.agendaUrl;
+
+    if (iframe.src !== targetUrl) {
+        iframe.src = targetUrl;
+    }
+}
+
+// Inicializar vista
+window.addEventListener('DOMContentLoaded', () => {
+    selectLab('lab101', document.querySelector('.card'));
+    
+    setInterval(() => {
+        document.getElementById("clock").textContent = new Date().toLocaleString("es-CL");
+    }, 1000);
+});
 </script>
 
 </body>

@@ -11,8 +11,8 @@
 <style>
 :root {
     --current-theme: #1e3a5f;
-    --current-theme-light: rgba(30, 58, 95, 0.04);
-    --current-theme-glow: rgba(30, 58, 95, 0.12);
+    --current-theme-light: rgba(30, 58, 95, 0.06);
+    --current-theme-glow: rgba(30, 58, 95, 0.15);
     --border-radius-lg: 16px;
     --border-radius-md: 12px;
 }
@@ -127,14 +127,15 @@ header h2 {
     padding: 22px;
     cursor: pointer;
     border: 2px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
 }
 
 .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
 }
 
 .card-header {
@@ -162,33 +163,54 @@ header h2 {
     height: 12px;
     border-radius: 50%;
     background: #cbd5e1;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-/* ESTILOS ACTIVOS TARJETAS */
+/* =========================================================
+   ESTILOS ACTIVOS CON FONDO Y DEGRADADO SUAVE ELEGANTE
+   ========================================================= */
+
+/* LAB -101 (AZUL AZULADO SUAVE) */
 .card[data-lab="lab101"].active {
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.08) 0%, #ffffff 100%);
     border-color: #1e3a5f;
-    box-shadow: 0 10px 25px -5px rgba(30, 58, 95, 0.15);
+    box-shadow: 0 10px 25px -5px rgba(30, 58, 95, 0.18), inset 0 0 0 1px rgba(30, 58, 95, 0.2);
 }
-.card[data-lab="lab101"].active .card-badge { background: #1e3a5f; }
+.card[data-lab="lab101"].active .card-badge { 
+    background: #1e3a5f; 
+    box-shadow: 0 0 8px rgba(30, 58, 95, 0.5);
+}
+.card[data-lab="lab101"].active h3 { color: #1e3a5f; }
 
+/* LAB -102 (VERDE ESMERALDA SUAVE) */
 .card[data-lab="lab102"].active {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.09) 0%, #ffffff 100%);
     border-color: #10b981;
-    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15);
+    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.18), inset 0 0 0 1px rgba(16, 185, 129, 0.2);
 }
-.card[data-lab="lab102"].active .card-badge { background: #10b981; }
+.card[data-lab="lab102"].active .card-badge { 
+    background: #10b981; 
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+.card[data-lab="lab102"].active h3 { color: #059669; }
 
+/* LAB 201 (PREBÁSICA - AMBAR/NARANJA SUAVE) */
 .card-kids {
     background: linear-gradient(180deg, #ffffff 0%, #fffbeb 100%);
     border-style: dashed !important;
 }
 
 .card[data-lab="lab201"].active {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, #fffdfa 100%) !important;
     border-color: #f59e0b !important;
     border-style: solid !important;
-    box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2);
+    box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2), inset 0 0 0 1px rgba(245, 158, 11, 0.2);
 }
-.card[data-lab="lab201"].active .card-badge { background: #f59e0b; }
+.card[data-lab="lab201"].active .card-badge { 
+    background: #f59e0b; 
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+.card[data-lab="lab201"].active h3 { color: #d97706; }
 
 /* BOTONES DE ACCIÓN */
 .action-buttons-container {
@@ -204,30 +226,37 @@ header h2 {
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    border: 1px solid #cbd5e1;
+    border: 1.5px solid #cbd5e1;
     background: #ffffff;
     color: #475569;
+}
+
+.btn-action:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: #0f172a;
 }
 
 .btn-action.active {
     background: var(--current-theme);
     color: #ffffff;
     border-color: var(--current-theme);
-    box-shadow: 0 10px 20px -5px var(--current-theme-glow);
+    box-shadow: 0 8px 20px -3px var(--current-theme-glow);
 }
 
 .status-banner {
-    background: #ffffff;
+    background: var(--current-theme-light);
     border: 1px solid #e2e8f0;
     border-left: 4px solid var(--current-theme);
     padding: 16px 20px;
     border-radius: var(--border-radius-md);
     margin-bottom: 24px;
+    transition: all 0.3s ease;
 }
 
 .status-text {
@@ -361,10 +390,9 @@ const labsConfig = {
         location: "Donde está oficina informática",
         color: "#1e3a5f",
         glow: "rgba(30, 58, 95, 0.25)",
-        bgLight: "rgba(30, 58, 95, 0.04)",
+        bgLight: "rgba(30, 58, 95, 0.05)",
         warning: false,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1yijX3eqzE4lBD7uVmn_9uvflj-KlsZuXv8FAbq40IMhItIckp2FtP8kNHfnImLWlcLBQbE4GV?gv=true",
-        // Agregado &color=%231e3a5f para forzar bloques de color Azul
         agendaUrl: "https://calendar.google.com/calendar/embed?src=c_ca9d8af8774116818857cd9b32f6a9c8407ce014f27be3981b78ee54d537186a%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%231e3a5f"
     },
     lab102: {
@@ -372,10 +400,9 @@ const labsConfig = {
         location: "Al frente de Informática",
         color: "#10b981",
         glow: "rgba(16, 185, 129, 0.25)",
-        bgLight: "rgba(16, 185, 129, 0.04)",
+        bgLight: "rgba(16, 185, 129, 0.05)",
         warning: false,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true",
-        // Agregado &color=%2310b981 para forzar bloques de color Verde
         agendaUrl: "https://calendar.google.com/calendar/embed?src=c_classroom6390a534%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%2310b981"
     },
     lab201: {
@@ -383,10 +410,9 @@ const labsConfig = {
         location: "Área de Prebásica",
         color: "#f59e0b",
         glow: "rgba(245, 158, 11, 0.25)",
-        bgLight: "rgba(245, 158, 11, 0.04)",
+        bgLight: "rgba(245, 158, 11, 0.05)",
         warning: true,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true",
-        // Agregado &color=%23f59e0b para forzar bloques de color Naranja
         agendaUrl: "https://calendar.google.com/calendar/embed?src=coemco.cl_g8t7m0k3n4lmut0mi4vlinsbmk%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%23f59e0b"
     }
 };

@@ -7,7 +7,7 @@
 <style>
 :root {
     --current-theme: #1e3a5f;
-    --current-theme-light: rgba(30, 58, 95, 0.1);
+    --current-theme-light: rgba(30, 58, 95, 0.08);
 }
 
 body {
@@ -90,44 +90,22 @@ header h2 {
     padding: 25px 20px;
 }
 
-/* BOTONES DE CAMBIO DE MODO */
-.view-toggle {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.toggle-btn {
-    padding: 12px 24px;
-    border: 2px solid transparent;
-    border-radius: 10px;
-    background: #e2e8f0;
-    color: #475569;
+/* TITULOS DE SECCIÓN */
+.section-title {
     font-size: 0.95rem;
     font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    margin-bottom: 12px;
 }
 
-.toggle-btn.active {
-    background: var(--current-theme);
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.mode-desc {
-    font-size: 1rem;
-    color: #475569;
-    margin-bottom: 15px;
-    font-weight: 500;
-}
-
-/* TARJETAS DE SELECCIÓN DE LABORATORIOS */
+/* TARJETAS DE LABORATORIO */
 .cards {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .card {
@@ -145,7 +123,7 @@ header h2 {
 }
 
 .card h3 {
-    margin: 0 0 8px 0;
+    margin: 0 0 6px 0;
     font-size: 1.25rem;
     transition: color 0.3s;
 }
@@ -161,48 +139,142 @@ header h2 {
     box-shadow: 0 8px 20px rgba(0,0,0,.1);
 }
 
-/* Estilos dinámicos cuando la tarjeta está ACTIVA */
+/* Estilos dinámicos para las tarjetas activas */
 .card[data-lab="lab101"].active {
     border-color: #1e3a5f;
-    box-shadow: 0 6px 20px rgba(30, 58, 95, 0.25);
-    background: linear-gradient(180deg, #ffffff 80%, rgba(30, 58, 95, 0.05) 100%);
+    box-shadow: 0 6px 20px rgba(30, 58, 95, 0.2);
 }
 .card[data-lab="lab101"].active h3 { color: #1e3a5f; }
 
 .card[data-lab="lab102"].active {
     border-color: #10b981;
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
-    background: linear-gradient(180deg, #ffffff 80%, rgba(16, 185, 129, 0.05) 100%);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.2);
 }
 .card[data-lab="lab102"].active h3 { color: #10b981; }
 
+/* ESTILO INFANTIL EXCLUSIVO PARA LAB 201 (PREBÁSICA) */
+.card-kids {
+    background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);
+    border: 3px dashed #f59e0b !important;
+}
+
+.card-kids .kids-badge {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 1.2rem;
+}
+
 .card[data-lab="lab201"].active {
-    border-color: #f59e0b;
-    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.25);
-    background: linear-gradient(180deg, #ffffff 80%, rgba(245, 158, 11, 0.05) 100%);
+    border: 3px solid #f59e0b !important;
+    background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
 }
 .card[data-lab="lab201"].active h3 { color: #d97706; }
 
-/* CAJA DE INFORMACIÓN DEL LAB SELECCIONADO */
-.info {
-    background: #ffffff;
-    padding: 16px 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+/* BOTONES DE ACCIÓN HIGHLIGHTED */
+.action-buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     margin-bottom: 20px;
-    border-left: 6px solid var(--current-theme);
-    transition: border-color 0.3s ease;
+    flex-wrap: wrap;
 }
 
+.btn-primary-action {
+    flex: 1.3;
+    min-width: 260px;
+    padding: 16px 28px;
+    border: none;
+    border-radius: 12px;
+    background: var(--current-theme);
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0.85;
+}
+
+.btn-primary-action.active {
+    opacity: 1;
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    border: 2px solid rgba(255,255,255,0.4);
+}
+
+.btn-primary-action:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+}
+
+.btn-secondary-action {
+    flex: 1;
+    min-width: 220px;
+    padding: 14px 22px;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-secondary-action.active {
+    background: #475569;
+    color: #ffffff;
+    border-color: #475569;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.btn-secondary-action:hover {
+    background: #f1f5f9;
+}
+
+/* BREADCRUMB / INDICADOR VISUAL */
+.status-banner {
+    background: var(--current-theme-light);
+    border-left: 5px solid var(--current-theme);
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.status-text {
+    font-size: 0.95rem;
+    color: #1e293b;
+}
+
+.status-text strong {
+    color: var(--current-theme);
+}
+
+/* AVISO TEMÁTICO NIÑOS */
 .notice {
     display: none;
     background: #fffbeb;
     color: #b45309;
     padding: 14px;
     border-left: 6px solid #f59e0b;
-    border-radius: 10px;
+    border-radius: 12px;
     margin-bottom: 20px;
     font-weight: 600;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
 }
 
 iframe {
@@ -226,7 +298,8 @@ footer {
     .banner-title { font-size: 1.2rem; }
     header { flex-direction: column; gap: 12px; text-align: center; }
     .header-brand { flex-direction: column; }
-    .view-toggle { flex-direction: column; }
+    .action-buttons-container { flex-direction: column; width: 100%; }
+    .btn-primary-action, .btn-secondary-action { width: 100%; }
 }
 </style>
 </head>
@@ -248,15 +321,9 @@ footer {
 </header>
 
 <div class="wrap">
-    <!-- BOTONES PARA ALTERNAR VISTAS -->
-    <div class="view-toggle">
-        <button id="btn-booking" class="toggle-btn active" onclick="switchMode('booking')">📅 Agendar Cita</button>
-        <button id="btn-agenda" class="toggle-btn" onclick="switchMode('agenda')">📋 Ver Reservas Agendadas</button>
-    </div>
-
-    <div class="mode-desc" id="mode-description">Seleccione un laboratorio para realizar una reserva:</div>
     
-    <!-- TARJETAS DE LABORATORIOS -->
+    <!-- PASO 1: SELECCIONAR LABORATORIO -->
+    <div class="section-title">1. Seleccione el Laboratorio:</div>
     <div class="cards">
         <div class="card active" data-lab="lab101" onclick="selectLab('lab101', this)">
             <h3>🖥 Lab -101</h3>
@@ -266,14 +333,36 @@ footer {
             <h3>🖥 Lab -102</h3>
             <p>Al frente de Informática</p>
         </div>
-        <div class="card" data-lab="lab201" onclick="selectLab('lab201', this)">
+        
+        <!-- LAB 201: ESTILO INFANTIL -->
+        <div class="card card-kids" data-lab="lab201" onclick="selectLab('lab201', this)">
+            <span class="kids-badge">🧸🎨</span>
             <h3>🧒 Lab 201</h3>
-            <p>Prebásica</p>
+            <p>Prebásica (1° a 4° Básico)</p>
         </div>
     </div>
 
-    <div id="notice" class="notice">⚠️ Este laboratorio es exclusivo para estudiantes de 1° a 4° básico.</div>
-    <div class="info" id="labinfo"></div>
+    <!-- AVISO VISUAL DE PREBÁSICA -->
+    <div id="notice" class="notice">🎈 <strong>Nota de uso:</strong> Este laboratorio cuenta con mobiliario y equipamiento adaptado exclusivamente para estudiantes de 1° a 4° básico.</div>
+
+    <!-- PASO 2: BOTONES DE ACCIÓN -->
+    <div class="section-title">2. Seleccione una acción:</div>
+    <div class="action-buttons-container">
+        <button id="btn-booking" class="btn-primary-action active" onclick="switchMode('booking')">
+            <span style="font-size:1.4rem;">➕</span> RESERVAR UN HORARIO
+        </button>
+        
+        <button id="btn-agenda" class="btn-secondary-action" onclick="switchMode('agenda')">
+            <span>🔍</span> Ver Ocupación Semanal
+        </button>
+    </div>
+
+    <!-- MENSAJE DEL ESTADO ACTUAL -->
+    <div class="status-banner">
+        <div class="status-text" id="status-desc">
+            Viendo opciones de reserva para <strong>Laboratorio -101</strong>
+        </div>
+    </div>
 
     <!-- CALENDARIO DINÁMICO -->
     <iframe id="main-iframe" src=""></iframe>
@@ -300,8 +389,8 @@ const labsConfig = {
         agendaUrl: "https://calendar.google.com/calendar/embed?src=c_classroom6390a534%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK"
     },
     lab201: {
-        title: "Laboratorio 201",
-        location: "Prebásica",
+        title: "Laboratorio 201 (Prebásica)",
+        location: "Área de Prebásica",
         color: "#f59e0b",
         warning: true,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true",
@@ -316,18 +405,14 @@ function selectLab(labId, cardElement) {
     currentLab = labId;
     const config = labsConfig[labId];
 
-    // Cambiar la variable CSS para adaptar los colores dinámicamente
     document.documentElement.style.setProperty('--current-theme', config.color);
     
-    // Activar tarjeta
     document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
     cardElement.classList.add('active');
 
-    // Mostrar aviso y detalles
     document.getElementById('notice').style.display = config.warning ? 'block' : 'none';
-    document.getElementById('labinfo').innerHTML = `<strong style="color:${config.color}; font-size:1.1rem;">${config.title}</strong><br>📍 ${config.location}`;
-
-    updateIframe();
+    
+    updateUI();
 }
 
 function switchMode(mode) {
@@ -336,23 +421,20 @@ function switchMode(mode) {
     document.getElementById('btn-booking').classList.toggle('active', mode === 'booking');
     document.getElementById('btn-agenda').classList.toggle('active', mode === 'agenda');
 
-    const desc = document.getElementById('mode-description');
-    if (mode === 'booking') {
-        desc.textContent = "Seleccione un laboratorio para tomar un horario disponible:";
-    } else {
-        desc.textContent = "Consulte la disponibilidad semanal y las reservas realizadas:";
-    }
-
-    updateIframe();
+    updateUI();
 }
 
-function updateIframe() {
+function updateUI() {
     const config = labsConfig[currentLab];
     const iframe = document.getElementById('main-iframe');
-    const targetUrl = (currentMode === 'booking') ? config.bookingUrl : config.agendaUrl;
+    const statusDesc = document.getElementById('status-desc');
 
-    if (iframe.src !== targetUrl) {
-        iframe.src = targetUrl;
+    if (currentMode === 'booking') {
+        statusDesc.innerHTML = `👉 Modo <strong>Reservar Horario</strong> en <strong>${config.title}</strong> (${config.location}). Haz clic en un bloque disponible para agendar.`;
+        iframe.src = config.bookingUrl;
+    } else {
+        statusDesc.innerHTML = `🔍 Viendo <strong>Ocupación Semanal</strong> del <strong>${config.title}</strong>. Aquí puedes revisar las reservas agendadas por otros docentes.`;
+        iframe.src = config.agendaUrl;
     }
 }
 

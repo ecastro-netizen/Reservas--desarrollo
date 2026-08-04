@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sistema de Reserva de Laboratorios</title>
+<title>Sistema de Reserva de Laboratorios | Colegio Concepción Los Acacios</title>
 <style>
 body {
     margin: 0;
@@ -11,7 +11,7 @@ body {
     background: #eef3f8;
 }
 
-/* BANNER CON IMAGEN DE FACHADA Y TEXTO SOBREPUESTO */
+/* BANNER SUPERIOR CON IMAGEN DE FACHADA */
 .banner-top {
     position: relative;
     width: 100%;
@@ -238,14 +238,14 @@ const labsConfig = {
         location: "Al frente de Informática",
         warning: false,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true",
-        agendaUrl: "https://calendar.google.com/calendar/embed?src=PEGA_AQUI_EL_ID_LAB102&ctz=America%2FSantiago&mode=WEEK"
+        agendaUrl: "https://calendar.google.com/calendar/embed?src=c_classroom6390a534%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK"
     },
     lab201: {
         title: "Laboratorio 201",
         location: "Prebásica",
         warning: true,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true",
-        agendaUrl: "https://calendar.google.com/calendar/embed?src=PEGA_AQUI_EL_ID_LAB201&ctz=America%2FSantiago&mode=WEEK"
+        agendaUrl: "https://calendar.google.com/calendar/embed?src=coemco.cl_g8t7m0k3n4lmut0mi4vlinsbmk%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK"
     }
 };
 
@@ -273,7 +273,7 @@ function switchMode(mode) {
 
     const desc = document.getElementById('mode-description');
     if (mode === 'booking') {
-        desc.textContent = "Seleccione un laboratorio para tomar un horario disponible:";
+        desc.textContent = "Seleccione un laboratorio para realizar una reserva.";
     } else {
         desc.textContent = "Consulte la disponibilidad semanal y las reservas realizadas:";
     }

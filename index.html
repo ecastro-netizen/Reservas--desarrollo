@@ -1,321 +1,185 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Reserva de Laboratorios | Colegio Concepción Los Acacios</title>
-    <style>
-        :root {
-            --primary: #1e3a5f;
-            --accent: #2b7cff;
-            --bg-color: #eef3f8;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sistema de Reserva de Laboratorios</title>
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #eef3f8;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+/* BANNER SUPERIOR CON IMAGEN DE FACHADA Y GRADIENTE */
+header {
+    background: linear-gradient(rgba(30, 58, 95, 0.75), rgba(43, 124, 255, 0.85)), 
+                url('banner.jpg') center/cover no-repeat;
+    color: #fff;
+    padding: 35px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
 
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-        /* --- BANNER DE FACHADA / CABECERA --- */
-        .hero-banner {
-            position: relative;
-            width: 100%;
-            height: 220px;
-            background: #1e3a5f url('banner.jpg') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
+.logo {
+    height: 70px;
+}
 
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.25);
-        }
+header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
 
-        .hero-title {
-            position: relative;
-            z-index: 1;
-            color: #ffffff;
-            font-size: 2rem;
-            font-weight: 600;
-            text-align: center;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-            margin: 0;
-            padding: 0 20px;
-        }
+#clock {
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
 
-        /* --- NAV / BARRA SECUNDARIA --- */
-        header {
-            background: linear-gradient(90deg, #1e3a5f, #2b7cff);
-            color: #fff;
-            padding: 12px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+.wrap {
+    max-width: 1300px;
+    margin: auto;
+    padding: 20px;
+}
 
-        .header-brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+.cards {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
 
-        .logo {
-            height: 55px;
-            object-fit: contain;
-        }
+.card {
+    flex: 1;
+    min-width: 220px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+    border: 3px solid transparent;
+    transition: transform 0.2s, border-color 0.2s;
+}
 
-        header h2 {
-            margin: 0;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
+.card:hover {
+    transform: translateY(-2px);
+}
 
-        #clock {
-            font-size: 0.95rem;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 6px 14px;
-            border-radius: 20px;
-            backdrop-filter: blur(4px);
-        }
+.card.active {
+    border-color: #2b7cff;
+}
 
-        /* --- CONTENIDO PRINCIPAL --- */
-        .wrap {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 25px 20px;
-        }
+.info {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    margin-bottom: 15px;
+}
 
-        .instruction {
-            font-size: 1rem;
-            margin-bottom: 15px;
-            color: #444;
-        }
+.notice {
+    display: none;
+    background: #fff3cd;
+    color: #7a5200;
+    padding: 12px;
+    border-left: 5px solid #ffc107;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
 
-        .cards {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
+iframe {
+    width: 100%;
+    height: 700px;
+    border: 0;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+}
 
-        .card {
-            flex: 1;
-            min-width: 240px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 18px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-            border: 3px solid transparent;
-            transition: all 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-        }
-
-        .card.active {
-            border-color: var(--accent);
-            background-color: #f0f5ff;
-        }
-
-        .card h3 {
-            margin: 0 0 6px 0;
-            color: #1e3a5f;
-            font-size: 1.15rem;
-        }
-
-        .card p {
-            margin: 0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* --- NOTIFICACIÓN Y DATOS --- */
-        .notice {
-            display: none;
-            background: #fff3cd;
-            color: #7a5200;
-            padding: 12px 16px;
-            border-left: 5px solid #ffc107;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-weight: 500;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .info {
-            background: var(--card-bg);
-            padding: 12px 18px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            margin-bottom: 15px;
-            border-left: 4px solid var(--accent);
-            font-size: 0.95rem;
-        }
-
-        /* --- CONTENEDOR DE IFRAME --- */
-        .iframe-container {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        iframe {
-            width: 100%;
-            height: 700px;
-            border: 0;
-            display: block;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #555;
-            font-size: 0.9rem;
-            margin-top: 20px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .hero-banner { height: 150px; }
-            .hero-title { font-size: 1.3rem; }
-            header { flex-direction: column; text-align: center; }
-            .header-brand { flex-direction: column; }
-            iframe { height: 550px; }
-        }
-    </style>
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #555;
+}
+</style>
 </head>
 <body>
 
-<!-- BANNER CON IMAGEN DE FACHADA -->
-<div class="hero-banner">
-    <div class="hero-overlay"></div>
-    <h1 class="hero-title">Bienvenidos al Sistema de Reserva de Laboratorios</h1>
-</div>
-
-<!-- BARRA PRINCIPAL DEL COLEGIO -->
 <header>
-    <div class="header-brand">
-        <img src="03 Logo acacios COEMCO CMYK (9).png" alt="Logo Colegio Concepción Los Acacios" class="logo">
+    <div class="header-title">
+        <img src="logo.png" class="logo" alt="Logo Colegio">
         <h2>Sistema de Reserva de Laboratorios</h2>
     </div>
-    <div id="clock">Cargando hora...</div>
+    <div id="clock"></div>
 </header>
 
 <div class="wrap">
-    <p class="instruction">Seleccione un laboratorio para realizar una reserva.</p>
+    <p>Seleccione un laboratorio para realizar una reserva.</p>
     
-    <!-- TARJETAS DE SELECCIÓN DE LAB -->
     <div class="cards">
-        <div class="card active" onclick="selectLab('lab101', this)">
-            <h3>🖥️ Lab -101</h3>
+        <div class="card active" onclick="showLab('lab101',this,false)">
+            <h3>🖥 Lab -101</h3>
             <p>Frente a Informática</p>
         </div>
-        <div class="card" onclick="selectLab('lab102', this)">
-            <h3>🖥️ Lab -102</h3>
+        <div class="card" onclick="showLab('lab102',this,false)">
+            <h3>🖥 Lab -102</h3>
             <p>Al frente de Informática</p>
         </div>
-        <div class="card" onclick="selectLab('lab201', this)">
+        <div class="card" onclick="showLab('lab201',this,true)">
             <h3>🧒 Lab 201</h3>
             <p>Prebásica</p>
         </div>
     </div>
 
-    <div id="notice" class="notice"></div>
+    <div id="notice" class="notice">⚠️ Este laboratorio es exclusivo para estudiantes de 1° a 4° básico.</div>
     <div class="info" id="labinfo"></div>
 
-    <!-- CALENDARIO DE GOOGLE EN IFRAME DINÁMICO -->
-    <div class="iframe-container">
-        <iframe id="calendar-frame" src="" title="Reserva de Laboratorio"></iframe>
+    <div id="lab101">
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1yijX3eqzE4lBD7uVmn_9uvflj-KlsZuXv8FAbq40IMhItIckp2FtP8kNHfnImLWlcLBQbE4GV?gv=true"></iframe>
+    </div>
+    <div id="lab102" style="display:none">
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true"></iframe>
+    </div>
+    <div id="lab201" style="display:none">
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true"></iframe>
     </div>
 </div>
 
-<footer>
-    Departamento de Informática - Colegio Concepción Los Acacios
-</footer>
+<footer>Departamento de Informática - Colegio Concepción Los Acacios</footer>
 
 <script>
-    const labs = {
-        lab101: {
-            title: "Laboratorio -101",
-            location: "Frente a Informática",
-            url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1yijX3eqzE4lBD7uVmn_9uvflj-KlsZuXv8FAbq40IMhItIckp2FtP8kNHfnImLWlcLBQbE4GV?gv=true",
-            warning: null
-        },
-        lab102: {
-            title: "Laboratorio -102",
-            location: "Frente a Informática",
-            url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true",
-            warning: null
-        },
-        lab201: {
-            title: "Laboratorio 201",
-            location: "Prebásica",
-            url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true",
-            warning: "⚠️ Este laboratorio es exclusivo para estudiantes de 1° a 4° básico."
-        }
-    };
+const infos = {
+    lab101: "<b>Laboratorio -101</b><br>📍 Frente a Informática",
+    lab102: "<b>Laboratorio -102</b><br>📍 Frente a Informática",
+    lab201: "<b>Laboratorio 201</b><br>📍 Prebásica"
+};
 
-    function selectLab(id, cardElement) {
-        const lab = labs[id];
-        if (!lab) return;
+function showLab(id, el, w) {
+    ["lab101", "lab102", "lab201"].forEach(x => document.getElementById(x).style.display = "none");
+    document.getElementById(id).style.display = "block";
+    document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
+    el.classList.add("active");
+    document.getElementById("notice").style.display = w ? "block" : "none";
+    document.getElementById("labinfo").innerHTML = infos[id];
+}
 
-        // Actualizar tarjeta activa
-        document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-        cardElement.classList.add('active');
+showLab('lab101', document.querySelector('.card'), false);
 
-        // Actualizar información
-        document.getElementById('labinfo').innerHTML = `<b>${lab.title}</b><br>📍 ${lab.location}`;
-
-        // Mostrar u ocultar alerta
-        const noticeEl = document.getElementById('notice');
-        if (lab.warning) {
-            noticeEl.textContent = lab.warning;
-            noticeEl.style.display = 'block';
-        } else {
-            noticeEl.style.display = 'none';
-        }
-
-        // Cargar URL en el iframe
-        const iframe = document.getElementById('calendar-frame');
-        if (iframe.src !== lab.url) {
-            iframe.src = lab.url;
-        }
-    }
-
-    // Actualizar reloj en tiempo real
-    function updateClock() {
-        document.getElementById("clock").textContent = new Date().toLocaleString("es-CL");
-    }
-
-    // Inicialización al cargar la página
-    window.addEventListener('DOMContentLoaded', () => {
-        selectLab('lab101', document.querySelector('.card'));
-        updateClock();
-        setInterval(updateClock, 1000);
-    });
+setInterval(() => {
+    document.getElementById("clock").textContent = new Date().toLocaleString("es-CL");
+}, 1000);
 </script>
+
 </body>
 </html>

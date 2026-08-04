@@ -11,7 +11,7 @@ body {
     background: #eef3f8;
 }
 
-/* BANNER CON IMAGEN DE FACHADA */
+/* BANNER CON IMAGEN DE FACHADA Y TEXTO SOBREPUESTO */
 .banner-top {
     position: relative;
     width: 100%;
@@ -40,7 +40,7 @@ body {
     padding: 0 15px;
 }
 
-/* CABECERA Y LOGO */
+/* BARRA PRINCIPAL Y LOGO */
 header {
     background: linear-gradient(90deg, #1e3a5f, #2b7cff);
     color: #fff;
@@ -74,17 +74,18 @@ header h2 {
     backdrop-filter: blur(4px);
 }
 
+/* CONTENEDOR PRINCIPAL */
 .wrap {
     max-width: 1300px;
     margin: auto;
     padding: 20px;
 }
 
-/* BOTONES DE CAMBIO DE MODO (RESERVAR VS VER AGENDA) */
+/* BOTONES DE CAMBIO DE MODO */
 .view-toggle {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .toggle-btn {
@@ -103,7 +104,7 @@ header h2 {
     color: #ffffff;
 }
 
-/* TARJETAS DE LABORATORIOS */
+/* TARJETAS DE SELECCIÓN DE LABORATORIOS */
 .cards {
     display: flex;
     gap: 15px;
@@ -175,11 +176,13 @@ footer {
 </head>
 <body>
 
+<!-- BANNER CON IMAGEN DE FACHADA -->
 <div class="banner-top">
     <div class="banner-overlay"></div>
     <h1 class="banner-title">Bienvenidos al Sistema de Reserva de Laboratorios</h1>
 </div>
 
+<!-- CABECERA PRINCIPAL -->
 <header>
     <div class="header-brand">
         <img src="logo.png" class="logo" alt="Logo Colegio Concepción Los Acacios">
@@ -189,13 +192,13 @@ footer {
 </header>
 
 <div class="wrap">
-    <!-- PESTAÑAS PARA CAMBIAR MODOS -->
+    <!-- BOTONES PARA ALTERNAR VISTAS -->
     <div class="view-toggle">
         <button id="btn-booking" class="toggle-btn active" onclick="switchMode('booking')">📅 Agendar Cita</button>
         <button id="btn-agenda" class="toggle-btn" onclick="switchMode('agenda')">📋 Ver Reservas Agendadas</button>
     </div>
 
-    <p id="mode-description">Seleccione un laboratorio para tomar un horario disponible:</p>
+    <p id="mode-description">Seleccione un laboratorio para realizar una reserva.</p>
     
     <div class="cards">
         <div class="card active" onclick="selectLab('lab101', this)">
@@ -215,49 +218,46 @@ footer {
     <div id="notice" class="notice">⚠️ Este laboratorio es exclusivo para estudiantes de 1° a 4° básico.</div>
     <div class="info" id="labinfo"></div>
 
+    <!-- CALENDARIO DINÁMICO -->
     <iframe id="main-iframe" src=""></iframe>
 </div>
 
 <footer>Departamento de Informática - Colegio Concepción Los Acacios</footer>
 
 <script>
-// CONFIGURACIÓN DE LOS LABORATORIOS (URLs de reserva y pública)
-// Reemplaza 'ID_CALENDARIO_XXX' por el ID/Email real del calendario si tienes la vista pública habilitada.
 const labsConfig = {
     lab101: {
         title: "Laboratorio -101",
         location: "Frente a Informática",
         warning: false,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1yijX3eqzE4lBD7uVmn_9uvflj-KlsZuXv8FAbq40IMhItIckp2FtP8kNHfnImLWlcLBQbE4GV?gv=true",
-        agendaUrl: "https://calendar.google.com/calendar/embed?src=ID_CALENDARIO_LAB101&ctz=America%2FSantiago&mode=WEEK"
+        agendaUrl: "https://calendar.google.com/calendar/embed?src=c_ca9d8af8774116818857cd9b32f6a9c8407ce014f27be3981b78ee54d537186a%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK"
     },
     lab102: {
         title: "Laboratorio -102",
         location: "Al frente de Informática",
         warning: false,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true",
-        agendaUrl: "https://calendar.google.com/calendar/embed?src=ID_CALENDARIO_LAB102&ctz=America%2FSantiago&mode=WEEK"
+        agendaUrl: "https://calendar.google.com/calendar/embed?src=PEGA_AQUI_EL_ID_LAB102&ctz=America%2FSantiago&mode=WEEK"
     },
     lab201: {
         title: "Laboratorio 201",
         location: "Prebásica",
         warning: true,
         bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true",
-        agendaUrl: "https://calendar.google.com/calendar/embed?src=ID_CALENDARIO_LAB201&ctz=America%2FSantiago&mode=WEEK"
+        agendaUrl: "https://calendar.google.com/calendar/embed?src=PEGA_AQUI_EL_ID_LAB201&ctz=America%2FSantiago&mode=WEEK"
     }
 };
 
 let currentLab = 'lab101';
-let currentMode = 'booking'; // 'booking' o 'agenda'
+let currentMode = 'booking';
 
 function selectLab(labId, cardElement) {
     currentLab = labId;
     
-    // Actualizar estilo visual de las tarjetas
     document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
     cardElement.classList.add('active');
 
-    // Mostrar aviso si corresponde
     const config = labsConfig[labId];
     document.getElementById('notice').style.display = config.warning ? 'block' : 'none';
     document.getElementById('labinfo').innerHTML = `<b>${config.title}</b><br>📍 ${config.location}`;
@@ -268,7 +268,6 @@ function selectLab(labId, cardElement) {
 function switchMode(mode) {
     currentMode = mode;
 
-    // Cambiar estado visual de los botones de modo
     document.getElementById('btn-booking').classList.toggle('active', mode === 'booking');
     document.getElementById('btn-agenda').classList.toggle('active', mode === 'agenda');
 
@@ -276,7 +275,7 @@ function switchMode(mode) {
     if (mode === 'booking') {
         desc.textContent = "Seleccione un laboratorio para tomar un horario disponible:";
     } else {
-        desc.textContent = "Consulte el calendario semanal de reservas realizadas:";
+        desc.textContent = "Consulte la disponibilidad semanal y las reservas realizadas:";
     }
 
     updateIframe();
@@ -292,7 +291,6 @@ function updateIframe() {
     }
 }
 
-// Inicializar vista
 window.addEventListener('DOMContentLoaded', () => {
     selectLab('lab101', document.querySelector('.card'));
     

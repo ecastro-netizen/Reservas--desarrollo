@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sistema de Reserva de Laboratorios de Computación | Colegio Concepción Los Acacios</title>
+<title>Sistema de Reserva de Laboratorios | Colegio Concepción Los Acacios</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -148,7 +148,7 @@ header h2 {
 
 .card h3 {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #0f172a;
 }
@@ -167,9 +167,11 @@ header h2 {
     transition: all 0.3s ease;
 }
 
-/* ESTILOS ACTIVOS CON FONDO SUAVE Y ELEGANTE */
+/* =========================================================
+   ESTILOS ACTIVOS CON FONDO SUAVE Y ELEGANTE
+   ========================================================= */
 
-/* LABORATORIO DE COMPUTACIÓN -101 (AZUL) */
+/* LAB -101 (AZUL) */
 .card[data-lab="lab101"].active {
     background: linear-gradient(135deg, rgba(30, 58, 95, 0.08) 0%, #ffffff 100%);
     border-color: #1e3a5f;
@@ -181,7 +183,7 @@ header h2 {
 }
 .card[data-lab="lab101"].active h3 { color: #1e3a5f; }
 
-/* LABORATORIO DE COMPUTACIÓN -102 (VERDE) */
+/* LAB -102 (VERDE) */
 .card[data-lab="lab102"].active {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.09) 0%, #ffffff 100%);
     border-color: #10b981;
@@ -193,7 +195,7 @@ header h2 {
 }
 .card[data-lab="lab102"].active h3 { color: #059669; }
 
-/* LABORATORIO DE COMPUTACIÓN 201 (NARANJA/PREBÁSICA) */
+/* LAB 201 (NARANJA/PREBÁSICA) */
 .card-kids {
     background: linear-gradient(180deg, #ffffff 0%, #fffbeb 100%);
     border-style: dashed !important;
@@ -302,91 +304,6 @@ footer {
     font-size: 0.85rem;
 }
 
-/* VENTANA EMERGENTE (MODAL) */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.65);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background: #ffffff;
-    border-radius: var(--border-radius-lg);
-    padding: 28px;
-    max-width: 480px;
-    width: 90%;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    transform: scale(0.9);
-    transition: all 0.3s ease;
-    border-top: 6px solid #f59e0b;
-}
-
-.modal-overlay.active .modal-content {
-    transform: scale(1);
-}
-
-.modal-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.modal-icon {
-    width: 44px;
-    height: 44px;
-    background: #fef3c7;
-    color: #d97706;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.modal-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #92400e;
-}
-
-.modal-body {
-    font-size: 0.95rem;
-    color: #475569;
-    margin-bottom: 24px;
-    line-height: 1.6;
-}
-
-.modal-btn {
-    width: 100%;
-    padding: 12px;
-    background: #f59e0b;
-    color: #ffffff;
-    border: none;
-    border-radius: var(--border-radius-md);
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.modal-btn:hover {
-    background: #d97706;
-}
-
 @media (max-width: 768px) {
     header { padding: 14px 20px; flex-direction: column; gap: 10px; }
     .action-buttons-container { grid-template-columns: 1fr; }
@@ -398,11 +315,12 @@ footer {
 
 <div class="banner-top">
     <div class="banner-overlay"></div>
-    <h1 class="banner-title">Sistema de Reserva de Laboratorios de Computación</h1>
+    <h1 class="banner-title">Sistema de Reserva de Laboratorios</h1>
 </div>
 
 <header>
     <div class="header-brand">
+        <!-- LOGO CON LA MAYÚSCULA 'Logo.png' PARA SERVIDORES LINUX/GITHUB -->
         <img src="Logo.png" class="logo" alt="Logo Colegio Concepción Los Acacios">
         <h2>Colegio Concepción Los Acacios</h2>
     </div>
@@ -414,7 +332,7 @@ footer {
     <div class="cards">
         <div class="card active" data-lab="lab101" onclick="selectLab('lab101', this)">
             <div class="card-header">
-                <h3>Laboratorio de Computación -101</h3>
+                <h3>Lab -101</h3>
                 <div class="card-badge"></div>
             </div>
             <p>Donde está oficina informática</p>
@@ -422,7 +340,7 @@ footer {
         
         <div class="card" data-lab="lab102" onclick="selectLab('lab102', this)">
             <div class="card-header">
-                <h3>Laboratorio de Computación -102</h3>
+                <h3>Lab -102</h3>
                 <div class="card-badge"></div>
             </div>
             <p>Al frente de Informática</p>
@@ -430,7 +348,7 @@ footer {
         
         <div class="card card-kids" data-lab="lab201" onclick="selectLab('lab201', this)">
             <div class="card-header">
-                <h3>Laboratorio de Computación 201 🧸</h3>
+                <h3>Lab 201 🧸</h3>
                 <div class="card-badge"></div>
             </div>
             <p>Área de Prebásica (1° a 4° Básico)</p>
@@ -438,7 +356,7 @@ footer {
     </div>
 
     <div id="notice" class="notice">
-        <strong>Nota de equipamiento:</strong> Este Laboratorio de Computación cuenta con mobiliario adaptado exclusivamente para estudiantes de 1° a 4° básico.
+        <strong>Nota de equipamiento:</strong> Este laboratorio cuenta con mobiliario adaptado exclusivamente para estudiantes de 1° a 4° básico.
     </div>
 
     <div class="section-label">2. Modalidad de Consulta</div>
@@ -456,7 +374,7 @@ footer {
 
     <div class="status-banner">
         <div class="status-text" id="status-desc">
-            Cargando información del Laboratorio de Computación...
+            Cargando información del laboratorio...
         </div>
     </div>
 
@@ -465,33 +383,12 @@ footer {
     </div>
 </div>
 
-<div id="alert-modal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-icon">
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                </svg>
-            </div>
-            <h3 class="modal-title">¡Atención Importante!</h3>
-        </div>
-        <div class="modal-body">
-            Usted va a reservar el <strong>Laboratorio de Computación del 1° Ciclo / Prebásica</strong>.
-            <br><br>
-            • <strong>Cursos permitidos:</strong> Recuerde que solo admite estudiantes de <strong>Prekínder a 4° Básico</strong>.
-            <br>
-            • <strong>Equipamiento:</strong> El mobiliario (sillas y mesas) está acondicionado a la medida de niños pequeños.
-        </div>
-        <button class="modal-btn" onclick="closeModal()">Entendido, continuar</button>
-    </div>
-</div>
-
 <footer>Departamento de Informática © Colegio Concepción Los Acacios</footer>
 
 <script>
 const labsConfig = {
     lab101: {
-        title: "Laboratorio de Computación -101",
+        title: "Laboratorio -101",
         location: "Donde está oficina informática",
         color: "#1e3a5f",
         glow: "rgba(30, 58, 95, 0.25)",
@@ -501,7 +398,7 @@ const labsConfig = {
         agendaUrl: "https://calendar.google.com/calendar/embed?src=c_ca9d8af8774116818857cd9b32f6a9c8407ce014f27be3981b78ee54d537186a%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%231e3a5f"
     },
     lab102: {
-        title: "Laboratorio de Computación -102",
+        title: "Laboratorio -102",
         location: "Al frente de Informática",
         color: "#10b981",
         glow: "rgba(16, 185, 129, 0.25)",
@@ -511,7 +408,7 @@ const labsConfig = {
         agendaUrl: "https://calendar.google.com/calendar/embed?src=c_classroom6390a534%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%2310b981"
     },
     lab201: {
-        title: "Laboratorio de Computación 201 (Prebásica)",
+        title: "Laboratorio 201 (Prebásica)",
         location: "Área de Prebásica",
         color: "#f59e0b",
         glow: "rgba(245, 158, 11, 0.25)",
@@ -538,19 +435,7 @@ function selectLab(labId, cardElement) {
 
     document.getElementById('notice').style.display = config.warning ? 'block' : 'none';
     
-    if (labId === 'lab201') {
-        openModal();
-    }
-
     updateUI();
-}
-
-function openModal() {
-    document.getElementById('alert-modal').classList.add('active');
-}
-
-function closeModal() {
-    document.getElementById('alert-modal').classList.remove('active');
 }
 
 function switchMode(mode) {
@@ -587,4 +472,3 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-

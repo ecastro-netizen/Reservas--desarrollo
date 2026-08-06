@@ -304,6 +304,93 @@ footer {
     font-size: 0.85rem;
 }
 
+/* =========================================================
+   ESTILOS VENTANA EMERGENTE (MODAL)
+   ========================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: #ffffff;
+    border-radius: var(--border-radius-lg);
+    padding: 28px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+    border-top: 6px solid #f59e0b;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.modal-icon {
+    width: 44px;
+    height: 44px;
+    background: #fef3c7;
+    color: #d97706;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #92400e;
+}
+
+.modal-body {
+    font-size: 0.95rem;
+    color: #475569;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.modal-btn {
+    width: 100%;
+    padding: 12px;
+    background: #f59e0b;
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.modal-btn:hover {
+    background: #d97706;
+}
+
 @media (max-width: 768px) {
     header { padding: 14px 20px; flex-direction: column; gap: 10px; }
     .action-buttons-container { grid-template-columns: 1fr; }
@@ -383,6 +470,28 @@ footer {
     </div>
 </div>
 
+<!-- ESTRUCTURA DE LA VENTANA EMERGENTE (MODAL) -->
+<div id="alert-modal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+            </div>
+            <h3 class="modal-title">¡Atención Importante!</h3>
+        </div>
+        <div class="modal-body">
+            Usted está seleccionando el laboratorio del <strong>1° Ciclo / Prebásica</strong>.
+            <br><br>
+            • <strong>Cursos permitidos:</strong> Exclusivo para estudiantes de <strong>Prekínder a 4° Básico</strong>.
+            <br>
+            • <strong>Equipamiento:</strong> El mobiliario (sillas y mesas) está acondicionado a la medida de niños pequeños.
+        </div>
+        <button class="modal-btn" onclick="closeModal()">Entendido, continuar</button>
+    </div>
+</div>
+
 <footer>Departamento de Informática © Colegio Concepción Los Acacios</footer>
 
 <script>
@@ -435,7 +544,20 @@ function selectLab(labId, cardElement) {
 
     document.getElementById('notice').style.display = config.warning ? 'block' : 'none';
     
+    // Disparar ventana emergente solo cuando se elige el laboratorio 201
+    if (labId === 'lab201') {
+        openModal();
+    }
+
     updateUI();
+}
+
+function openModal() {
+    document.getElementById('alert-modal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('alert-modal').classList.remove('active');
 }
 
 function switchMode(mode) {

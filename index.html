@@ -148,7 +148,7 @@ header h2 {
 
 .card h3 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: #0f172a;
 }
@@ -167,9 +167,7 @@ header h2 {
     transition: all 0.3s ease;
 }
 
-/* =========================================================
-   ESTILOS ACTIVOS CON FONDO SUAVE Y ELEGANTE
-   ========================================================= */
+/* ESTILOS ACTIVOS CON FONDO SUAVE Y ELEGANTE */
 
 /* LABORATORIO DE COMPUTACIÓN -101 (AZUL) */
 .card[data-lab="lab101"].active {
@@ -304,9 +302,7 @@ footer {
     font-size: 0.85rem;
 }
 
-/* =========================================================
-   ESTILOS VENTANA EMERGENTE (MODAL)
-   ========================================================= */
+/* VENTANA EMERGENTE (MODAL) */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -407,7 +403,6 @@ footer {
 
 <header>
     <div class="header-brand">
-        <!-- LOGO CON LA MAYÚSCULA 'Logo.png' PARA SERVIDORES LINUX/GITHUB -->
         <img src="Logo.png" class="logo" alt="Logo Colegio Concepción Los Acacios">
         <h2>Colegio Concepción Los Acacios</h2>
     </div>
@@ -470,7 +465,6 @@ footer {
     </div>
 </div>
 
-<!-- ESTRUCTURA DE LA VENTANA EMERGENTE (MODAL) -->
 <div id="alert-modal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
@@ -544,7 +538,6 @@ function selectLab(labId, cardElement) {
 
     document.getElementById('notice').style.display = config.warning ? 'block' : 'none';
     
-    // Disparar ventana emergente solo cuando se elige el laboratorio 201
     if (labId === 'lab201') {
         openModal();
     }

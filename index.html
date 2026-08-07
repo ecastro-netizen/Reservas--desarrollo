@@ -11,13 +11,9 @@
 <style>
 :root {
     --primary-blue: #0252cd;
-    --primary-dark: #001f54;
     --border-radius-lg: 20px;
     --border-radius-md: 14px;
-    --border-radius-sm: 10px;
     --card-bg: #ffffff;
-    --text-title: #0f172a;
-    --text-body: #64748b;
 }
 
 * {
@@ -30,29 +26,29 @@ body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: #0d284f;
     background-image: 
-        radial-gradient(circle at 10% 10%, rgba(2, 82, 205, 0.4) 0%, transparent 40%),
-        radial-gradient(circle at 90% 20%, rgba(0, 31, 84, 0.6) 0%, transparent 50%),
-        linear-gradient(180deg, #0a1e3f 0%, #0d284f 100%);
+        radial-gradient(circle at 80% 10%, rgba(2, 82, 205, 0.35) 0%, transparent 40%),
+        linear-gradient(180deg, #091a38 0%, #0d284f 100%);
     background-attachment: fixed;
     color: #1e293b;
-    line-height: 1.5;
     min-height: 100vh;
 }
 
-/* ================= HEADER & HERO ================= */
+/* ================= HERO HEADER & TOP COMPUTERS ================= */
 .hero-header {
     position: relative;
-    padding: 24px 48px 120px 48px;
+    padding: 24px 60px 110px 60px;
     color: #ffffff;
-    max-width: 1400px;
+    max-width: 1440px;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 32px;
+    position: relative;
+    z-index: 2;
 }
 
 .brand-container {
@@ -64,13 +60,11 @@ body {
 .brand-logo {
     height: 48px;
     width: auto;
-    object-fit: contain;
 }
 
 .brand-info h2 {
     font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: -0.01em;
     color: #ffffff;
 }
 
@@ -87,7 +81,7 @@ body {
     color: #cbd5e1;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 8px 18px;
     border-radius: 30px;
     font-weight: 500;
@@ -96,19 +90,21 @@ body {
 .hero-title-area {
     text-align: center;
     max-width: 650px;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-title-area h1 {
     font-size: 2.2rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .hero-title-area p {
     color: #94a3b8;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .title-accent-line {
@@ -116,23 +112,35 @@ body {
     height: 4px;
     background: #f59e0b;
     border-radius: 2px;
-    margin: 16px auto 0 auto;
+    margin: 14px auto 0 auto;
 }
 
-/* ================= MAIN CONTAINER ================= */
+/* Ilustraciones de Fondo de la Cabecera (Derecha e Izquierda) */
+.hero-computers-bg {
+    position: absolute;
+    right: 40px;
+    top: 30px;
+    width: 320px;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ================= MAIN CARD CONTAINER ================= */
 .main-wrapper {
     max-width: 1280px;
-    margin: -70px auto 40px auto;
+    margin: -60px auto 40px auto;
     padding: 0 24px;
     position: relative;
     z-index: 10;
 }
 
 .app-card {
-    background: #f8fafc;
+    background: #ffffff;
     border-radius: 28px;
-    padding: 36px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 36px 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
 .section-header {
@@ -143,11 +151,11 @@ body {
 }
 
 .section-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: #e0e7ff;
-    color: var(--primary-blue);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid #2563eb;
+    color: #2563eb;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -166,7 +174,7 @@ body {
     color: #64748b;
 }
 
-/* ================= CARDS LABS ================= */
+/* ================= LAB CARDS CON ILUSTRACIONES DE COMPUTADORES ================= */
 .labs-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -175,9 +183,9 @@ body {
 }
 
 .lab-card {
-    background: #ffffff;
+    background: #f8fafc;
     border-radius: var(--border-radius-lg);
-    padding: 20px 24px;
+    padding: 16px 20px;
     cursor: pointer;
     border: 2px solid #e2e8f0;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -187,38 +195,31 @@ body {
     position: relative;
 }
 
-.lab-card:hover {
-    border-color: #cbd5e1;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
-}
-
-.lab-card-content {
+.lab-card-left {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-.lab-icon-box {
-    width: 54px;
-    height: 54px;
-    border-radius: 12px;
+.lab-computer-img {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
 }
 
 .lab-info h4 {
     font-size: 1rem;
     font-weight: 700;
-    color: var(--text-title);
+    color: #0f172a;
     margin-bottom: 2px;
 }
 
 .lab-info p {
-    font-size: 0.825rem;
-    color: var(--text-body);
+    font-size: 0.8rem;
+    color: #64748b;
 }
 
 .radio-indicator {
@@ -243,26 +244,22 @@ body {
     transition: opacity 0.2s ease;
 }
 
-/* LAB SPECIFIC STYLES */
-/* Lab 101 */
-.lab-card[data-lab="lab101"] .lab-icon-box { background: #eff6ff; color: #2563eb; }
+/* ESTILOS DE SELECCIÓN DE LABS */
 .lab-card[data-lab="lab101"].active {
-    border-color: #2563eb;
-    background: #ffffff;
-    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.15);
+    border-color: #0252cd;
+    background: #f0f6ff;
+    box-shadow: 0 10px 20px -5px rgba(2, 82, 205, 0.12);
 }
 .lab-card[data-lab="lab101"].active .radio-indicator {
-    background: #2563eb;
-    border-color: #2563eb;
+    background: #0252cd;
+    border-color: #0252cd;
 }
 .lab-card[data-lab="lab101"].active .radio-indicator::after { opacity: 1; }
 
-/* Lab 102 */
-.lab-card[data-lab="lab102"] .lab-icon-box { background: #ecfdf5; color: #10b981; }
 .lab-card[data-lab="lab102"].active {
     border-color: #10b981;
-    background: #ffffff;
-    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15);
+    background: #f0fdf4;
+    box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.12);
 }
 .lab-card[data-lab="lab102"].active .radio-indicator {
     background: #10b981;
@@ -270,17 +267,15 @@ body {
 }
 .lab-card[data-lab="lab102"].active .radio-indicator::after { opacity: 1; }
 
-/* Lab 201 */
 .lab-card[data-lab="lab201"] {
-    background: #fffefb;
+    background: #fffdf5;
     border: 2px dashed #fcd34d;
 }
-.lab-card[data-lab="lab201"] .lab-icon-box { background: #fef3c7; color: #d97706; }
 .lab-card[data-lab="lab201"].active {
     border-color: #f59e0b;
     border-style: solid;
-    background: #ffffff;
-    box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.18);
+    background: #fffbf0;
+    box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.15);
 }
 .lab-card[data-lab="lab201"].active .radio-indicator {
     background: #f59e0b;
@@ -288,12 +283,20 @@ body {
 }
 .lab-card[data-lab="lab201"].active .radio-indicator::after { opacity: 1; }
 
-/* ================= MODES & ACTIONS ================= */
-.modes-grid {
+
+/* ================= SECCIÓN 2 CON ILUSTRACIÓN DE LAPTOP ================= */
+.section2-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    align-items: center;
     margin-bottom: 24px;
+}
+
+.modes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .mode-btn {
@@ -311,12 +314,11 @@ body {
 
 .mode-btn:hover {
     border-color: #cbd5e1;
-    background: #ffffff;
 }
 
 .mode-icon-box {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: 10px;
     background: #f1f5f9;
     color: #475569;
@@ -324,7 +326,6 @@ body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: all 0.25s ease;
 }
 
 .mode-text h5 {
@@ -345,7 +346,7 @@ body {
 }
 
 .mode-btn.active .mode-icon-box {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     color: #ffffff;
 }
 
@@ -354,23 +355,36 @@ body {
     color: #ffffff;
 }
 
+/* Ilustración Laptop + Calendario a la derecha */
+.section2-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section2-illustration svg {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+}
+
 /* ================= STATUS BANNER ================= */
 .status-banner {
-    background: #ebf3ff;
+    background: #eef5ff;
     border-radius: var(--border-radius-md);
     padding: 14px 20px;
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 24px;
-    color: #1e40af;
+    color: #1e3a8a;
     font-size: 0.875rem;
 }
 
 .status-icon {
-    width: 24px;
-    height: 24px;
-    background: #2563eb;
+    width: 22px;
+    height: 22px;
+    background: #0252cd;
     color: #ffffff;
     border-radius: 50%;
     display: flex;
@@ -381,14 +395,13 @@ body {
     flex-shrink: 0;
 }
 
-/* ================= IFRAME DISPLAY ================= */
-.iframe-container {
+/* ================= IFRAME AREA CON DIBUJO DE PC ESQUINA INFERIOR ================= */
+.iframe-wrapper {
+    position: relative;
     background: #ffffff;
     border-radius: var(--border-radius-lg);
-    padding: 12px;
     border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-    overflow: hidden;
+    padding: 12px;
 }
 
 iframe {
@@ -396,6 +409,16 @@ iframe {
     height: 720px;
     border: 0;
     border-radius: var(--border-radius-md);
+}
+
+/* Computador decorativo en la esquina inferior derecha */
+.corner-pc-illustration {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 180px;
+    pointer-events: none;
+    z-index: 20;
 }
 
 footer {
@@ -487,8 +510,10 @@ footer {
 /* Responsive */
 @media (max-width: 1024px) {
     .labs-grid { grid-template-columns: 1fr; }
-    .modes-grid { grid-template-columns: 1fr; }
-    .hero-header { padding: 24px 24px 100px 24px; }
+    .section2-container { grid-template-columns: 1fr; }
+    .section2-illustration { display: none; }
+    .hero-computers-bg { display: none; }
+    .hero-header { padding: 24px 24px 90px 24px; }
     .top-bar { flex-direction: column; gap: 16px; align-items: flex-start; }
 }
 </style>
@@ -510,6 +535,22 @@ footer {
         </div>
     </div>
 
+    <!-- ILUSTRACIÓN DE COMPUTADORES EN EL HEADER DE LA IMAGEN DE REFERENCIA -->
+    <div class="hero-computers-bg">
+        <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="90" y="20" width="180" height="110" rx="12" fill="#1e3a8a" opacity="0.8"/>
+            <rect x="98" y="28" width="164" height="94" rx="8" fill="#3b82f6" opacity="0.9"/>
+            <path d="M150 130 L130 165 H230 L210 130 Z" fill="#1e293b"/>
+            <rect x="110" y="165" width="140" height="10" rx="4" fill="#334155"/>
+            <!-- Monitor secundario -->
+            <rect x="10" y="50" width="110" height="75" rx="8" fill="#0f172a" opacity="0.7"/>
+            <rect x="16" y="56" width="98" height="63" rx="5" fill="#2563eb" opacity="0.7"/>
+            <!-- Torre PC -->
+            <rect x="250" y="45" width="45" height="115" rx="6" fill="#0f172a"/>
+            <circle cx="272" cy="65" r="5" fill="#38bdf8"/>
+        </svg>
+    </div>
+
     <div class="hero-title-area">
         <h1>Sistema de Reserva de Laboratorios</h1>
         <p>Reserva de laboratorios de computación de forma fácil y rápida</p>
@@ -521,9 +562,7 @@ footer {
     <div class="app-card">
         <!-- SECCIÓN 1: SELECCIONAR UBICACIÓN -->
         <div class="section-header">
-            <div class="section-icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            </div>
+            <div class="section-icon">📍</div>
             <div class="section-title-group">
                 <h3>1. Seleccionar ubicación</h3>
                 <p>Elige el laboratorio que deseas reservar</p>
@@ -531,11 +570,19 @@ footer {
         </div>
 
         <div class="labs-grid">
-            <!-- Lab 101 -->
+            <!-- Lab 101 - Computador Azul -->
             <div class="lab-card active" data-lab="lab101" onclick="handleLabClick('lab101', this)">
-                <div class="lab-card-content">
-                    <div class="lab-icon-box">
-                        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <div class="lab-card-left">
+                    <div class="lab-computer-img">
+                        <svg viewBox="0 0 64 64" fill="none">
+                            <rect x="6" y="10" width="42" height="30" rx="4" fill="#2563eb"/>
+                            <rect x="10" y="14" width="34" height="22" rx="2" fill="#60a5fa"/>
+                            <path d="M22 40L18 52H36L32 40Z" fill="#1d4ed8"/>
+                            <rect x="14" y="52" width="26" height="4" rx="2" fill="#1e40af"/>
+                            <!-- CPU Tower -->
+                            <rect x="46" y="16" width="12" height="36" rx="3" fill="#1e293b"/>
+                            <circle cx="52" cy="22" r="2" fill="#60a5fa"/>
+                        </svg>
                     </div>
                     <div class="lab-info">
                         <h4>Laboratorio de Computación -101</h4>
@@ -545,11 +592,16 @@ footer {
                 <div class="radio-indicator"></div>
             </div>
 
-            <!-- Lab 102 -->
+            <!-- Lab 102 - Computador Verde -->
             <div class="lab-card" data-lab="lab102" onclick="handleLabClick('lab102', this)">
-                <div class="lab-card-content">
-                    <div class="lab-icon-box">
-                        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <div class="lab-card-left">
+                    <div class="lab-computer-img">
+                        <svg viewBox="0 0 64 64" fill="none">
+                            <rect x="8" y="12" width="48" height="32" rx="4" fill="#10b981"/>
+                            <rect x="12" y="16" width="40" height="24" rx="2" fill="#a7f3d0"/>
+                            <path d="M26 44L22 54H42L38 44Z" fill="#047857"/>
+                            <rect x="18" y="54" width="28" height="4" rx="2" fill="#065f46"/>
+                        </svg>
                     </div>
                     <div class="lab-info">
                         <h4>Laboratorio de Computación -102</h4>
@@ -559,14 +611,24 @@ footer {
                 <div class="radio-indicator"></div>
             </div>
 
-            <!-- Lab 201 -->
+            <!-- Lab 201 - Computador Morado + Osito Prebásica -->
             <div class="lab-card" data-lab="lab201" onclick="handleLabClick('lab201', this)">
-                <div class="lab-card-content">
-                    <div class="lab-icon-box">
-                        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5z"/></svg>
+                <div class="lab-card-left">
+                    <div class="lab-computer-img">
+                        <svg viewBox="0 0 64 64" fill="none">
+                            <rect x="6" y="12" width="40" height="28" rx="4" fill="#8b5cf6"/>
+                            <rect x="10" y="16" width="32" height="20" rx="2" fill="#ddd6fe"/>
+                            <path d="M20 40L17 50H35L32 40Z" fill="#6d28d9"/>
+                            <rect x="14" y="50" width="24" height="4" rx="2" fill="#5b21b6"/>
+                            <!-- Osito de peluche ilustrado -->
+                            <circle cx="48" cy="42" r="8" fill="#d97706"/>
+                            <circle cx="43" cy="35" r="3" fill="#b45309"/>
+                            <circle cx="53" cy="35" r="3" fill="#b45309"/>
+                            <circle cx="48" cy="43" r="3" fill="#fef3c7"/>
+                        </svg>
                     </div>
                     <div class="lab-info">
-                        <h4>Laboratorio de Computación 201 🧸</h4>
+                        <h4>Laboratorio de Computación 201</h4>
                         <p>Área de Prebásica (Prekínder a 4° Básico)</p>
                     </div>
                 </div>
@@ -574,37 +636,62 @@ footer {
             </div>
         </div>
 
-        <!-- SECCIÓN 2: MODALIDAD DE CONSULTA -->
+        <!-- SECCIÓN 2: MODALIDAD DE CONSULTA CON ILUSTRACIÓN DE LAPTOP Y CALENDARIO -->
         <div class="section-header">
-            <div class="section-icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
+            <div class="section-icon">📅</div>
             <div class="section-title-group">
                 <h3>2. Modalidad de consulta</h3>
                 <p>Elige cómo deseas consultar o reservar</p>
             </div>
         </div>
 
-        <div class="modes-grid">
-            <button id="btn-booking" class="mode-btn active" onclick="switchMode('booking')">
-                <div class="mode-icon-box">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
-                </div>
-                <div class="mode-text">
-                    <h5>Reservar un horario</h5>
-                    <p>Selecciona un bloque disponible y reserva</p>
-                </div>
-            </button>
+        <div class="section2-container">
+            <div class="modes-grid">
+                <button id="btn-booking" class="mode-btn active" onclick="switchMode('booking')">
+                    <div class="mode-icon-box">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
+                    </div>
+                    <div class="mode-text">
+                        <h5>Reservar un horario</h5>
+                        <p>Selecciona un bloque disponible y reserva</p>
+                    </div>
+                </button>
 
-            <button id="btn-agenda" class="mode-btn" onclick="switchMode('agenda')">
-                <div class="mode-icon-box">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                </div>
-                <div class="mode-text">
-                    <h5>Ver ocupación semanal</h5>
-                    <p>Consulta la disponibilidad de la semana</p>
-                </div>
-            </button>
+                <button id="btn-agenda" class="mode-btn" onclick="switchMode('agenda')">
+                    <div class="mode-icon-box">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <div class="mode-text">
+                        <h5>Ver ocupación semanal</h5>
+                        <p>Consulta la disponibilidad de la semana</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- ILUSTRACIÓN DE LAPTOP + CALENDARIO (Como en la foto) -->
+            <div class="section2-illustration">
+                <svg viewBox="0 0 220 160" fill="none">
+                    <!-- Planta -->
+                    <path d="M190 120 C190 100, 205 90, 210 80 C200 95, 195 110, 190 120Z" fill="#34d399"/>
+                    <path d="M195 125 C205 110, 215 110, 220 100 C210 112, 200 120, 195 125Z" fill="#10b981"/>
+                    <path d="M185 130 H200 L196 145 H189 Z" fill="#94a3b8"/>
+                    <!-- Laptop -->
+                    <rect x="20" y="50" width="130" height="80" rx="8" fill="#1e3a8a"/>
+                    <rect x="26" y="56" width="118" height="68" rx="4" fill="#2563eb"/>
+                    <path d="M5 130 H165 L155 142 H15 Z" fill="#94a3b8"/>
+                    <!-- Floating Calendar on Laptop Screen -->
+                    <rect x="45" y="30" width="80" height="65" rx="6" fill="#ffffff" filter="drop-shadow(0px 8px 12px rgba(0,0,0,0.15))"/>
+                    <rect x="45" y="30" width="80" height="18" rx="6" fill="#2563eb"/>
+                    <circle cx="55" cy="39" r="2" fill="#ffffff"/>
+                    <circle cx="63" cy="39" r="2" fill="#ffffff"/>
+                    <rect x="52" y="54" width="12" height="10" rx="2" fill="#bfdbfe"/>
+                    <rect x="68" y="54" width="12" height="10" rx="2" fill="#bfdbfe"/>
+                    <rect x="84" y="54" width="12" height="10" rx="2" fill="#2563eb"/>
+                    <rect x="100" y="54" width="12" height="10" rx="2" fill="#bfdbfe"/>
+                    <rect x="52" y="68" width="12" height="10" rx="2" fill="#bfdbfe"/>
+                    <rect x="68" y="68" width="12" height="10" rx="2" fill="#bfdbfe"/>
+                </svg>
+            </div>
         </div>
 
         <!-- STATUS BANNER -->
@@ -613,9 +700,25 @@ footer {
             <div id="status-desc">Cargando información del laboratorio...</div>
         </div>
 
-        <!-- IFRAME CONTAINER -->
-        <div class="iframe-container">
+        <!-- CONTAINER DEL IFRAME CON COMPUTADOR DECORATIVO INFERIOR DERECHO -->
+        <div class="iframe-wrapper">
             <iframe id="main-iframe" src=""></iframe>
+
+            <!-- Ilustración Computador de Escritorio Esquina Inferior -->
+            <div class="corner-pc-illustration">
+                <svg viewBox="0 0 160 140" fill="none">
+                    <rect x="10" y="20" width="110" height="75" rx="8" fill="#1e293b"/>
+                    <rect x="16" y="26" width="98" height="63" rx="4" fill="#3b82f6"/>
+                    <path d="M50 95 L42 118 H88 L80 95 Z" fill="#334155"/>
+                    <rect x="36" y="118" width="58" height="6" rx="3" fill="#1e293b"/>
+                    <!-- CPU Tower -->
+                    <rect x="125" y="35" width="30" height="88" rx="5" fill="#0f172a"/>
+                    <circle cx="140" cy="50" r="3" fill="#38bdf8"/>
+                    <!-- Planta al lado -->
+                    <path d="M2 110 C-5 90, 5 80, 8 70 C5 85, 2 100, 2 110Z" fill="#34d399"/>
+                    <path d="M0 120 H12 L9 132 H3 Z" fill="#64748b"/>
+                </svg>
+            </div>
         </div>
     </div>
 

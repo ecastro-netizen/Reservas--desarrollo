@@ -148,7 +148,7 @@ header h2 {
 
 .card h3 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: #0f172a;
 }
@@ -304,6 +304,87 @@ footer {
     font-size: 0.85rem;
 }
 
+/* =========================================================
+   ESTILOS PARA LA VENTANA EMERGENTE (MODAL)
+   ========================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: #ffffff;
+    border-radius: var(--border-radius-lg);
+    padding: 28px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-icon {
+    width: 56px;
+    height: 56px;
+    background: #fef3c7;
+    color: #d97706;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px auto;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #92400e;
+    margin-bottom: 12px;
+}
+
+.modal-text {
+    font-size: 0.925rem;
+    color: #475569;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.modal-btn {
+    background: #f59e0b;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    width: 100%;
+}
+
+.modal-btn:hover {
+    background: #d97706;
+}
+
 @media (max-width: 768px) {
     header { padding: 14px 20px; flex-direction: column; gap: 10px; }
     .action-buttons-container { grid-template-columns: 1fr; }
@@ -330,33 +411,33 @@ footer {
 <div class="wrap">
     <div class="section-label">1. Seleccionar Ubicación</div>
     <div class="cards">
-        <div class="card active" data-lab="lab101" onclick="selectLab('lab101', this)">
+        <div class="card active" data-lab="lab101" onclick="handleLabClick('lab101', this)">
             <div class="card-header">
-                <h3>Lab -101</h3>
+                <h3>Laboratorio de Computación -101</h3>
                 <div class="card-badge"></div>
             </div>
             <p>Donde está oficina informática</p>
         </div>
         
-        <div class="card" data-lab="lab102" onclick="selectLab('lab102', this)">
+        <div class="card" data-lab="lab102" onclick="handleLabClick('lab102', this)">
             <div class="card-header">
-                <h3>Lab -102</h3>
+                <h3>Laboratorio de Computación -102</h3>
                 <div class="card-badge"></div>
             </div>
             <p>Al frente de Informática</p>
         </div>
         
-        <div class="card card-kids" data-lab="lab201" onclick="selectLab('lab201', this)">
+        <div class="card card-kids" data-lab="lab201" onclick="handleLabClick('lab201', this)">
             <div class="card-header">
-                <h3>Lab 201 🧸</h3>
+                <h3>Laboratorio de Computación 201 🧸</h3>
                 <div class="card-badge"></div>
             </div>
-            <p>Área de Prebásica (1° a 4° Básico)</p>
+            <p>Área de Prebásica (Prekínder a 4° Básico)</p>
         </div>
     </div>
 
     <div id="notice" class="notice">
-        <strong>Nota de equipamiento:</strong> Este laboratorio cuenta con mobiliario adaptado exclusivamente para estudiantes de 1° a 4° básico.
+        <strong>Nota de equipamiento:</strong> Este laboratorio cuenta con mobiliario adaptado exclusivamente para estudiantes de Prekínder a 4° Básico.
     </div>
 
     <div class="section-label">2. Modalidad de Consulta</div>
@@ -383,12 +464,28 @@ footer {
     </div>
 </div>
 
+<!-- VENTANA EMERGENTE (MODAL ALERTA LAB 201) -->
+<div id="alert-modal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-icon">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+        </div>
+        <h3 class="modal-title">¡Atención!</h3>
+        <p class="modal-text">
+            Usted está seleccionando el laboratorio para niños de <strong>Prekínder a 4° Básico</strong>. Solo está destinado para este nivel educativo, ya que el mobiliario y equipamiento están adaptados únicamente para ellos.
+        </p>
+        <button class="modal-btn" onclick="closeModal()">Entendido, continuar</button>
+    </div>
+</div>
+
 <footer>Departamento de Informática © Colegio Concepción Los Acacios</footer>
 
 <script>
 const labsConfig = {
     lab101: {
-        title: "Laboratorio -101",
+        title: "Laboratorio de Computación -101",
         location: "Donde está oficina informática",
         color: "#1e3a5f",
         glow: "rgba(30, 58, 95, 0.25)",
@@ -398,7 +495,7 @@ const labsConfig = {
         agendaUrl: "https://calendar.google.com/calendar/embed?src=c_ca9d8af8774116818857cd9b32f6a9c8407ce014f27be3981b78ee54d537186a%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%231e3a5f"
     },
     lab102: {
-        title: "Laboratorio -102",
+        title: "Laboratorio de Computación -102",
         location: "Al frente de Informática",
         color: "#10b981",
         glow: "rgba(16, 185, 129, 0.25)",
@@ -408,7 +505,7 @@ const labsConfig = {
         agendaUrl: "https://calendar.google.com/calendar/embed?src=c_classroom6390a534%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%2310b981"
     },
     lab201: {
-        title: "Laboratorio 201 (Prebásica)",
+        title: "Laboratorio de Computación 201 (Prebásica)",
         location: "Área de Prebásica",
         color: "#f59e0b",
         glow: "rgba(245, 158, 11, 0.25)",
@@ -421,6 +518,24 @@ const labsConfig = {
 
 let currentLab = 'lab101';
 let currentMode = 'booking';
+let pendingLabSelection = null;
+
+function handleLabClick(labId, cardElement) {
+    if (labId === 'lab201') {
+        pendingLabSelection = { labId, cardElement };
+        document.getElementById('alert-modal').classList.add('active');
+    } else {
+        selectLab(labId, cardElement);
+    }
+}
+
+function closeModal() {
+    document.getElementById('alert-modal').classList.remove('active');
+    if (pendingLabSelection) {
+        selectLab(pendingLabSelection.labId, pendingLabSelection.cardElement);
+        pendingLabSelection = null;
+    }
+}
 
 function selectLab(labId, cardElement) {
     currentLab = labId;

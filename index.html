@@ -1,10 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Sistema de Reserva de Laboratorios | Colegio Concepción Los Acacios</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 :root {
     --primary-blue: #0252cd;
     --border-radius-lg: 20px;
@@ -37,7 +34,7 @@ body {
     min-height: 100vh;
 }
 
-/* ================= HERO HEADER & TOP COMPUTERS ================= */
+/* ================= HERO HEADER ================= */
 
 .hero-header {
     position: relative;
@@ -116,7 +113,7 @@ body {
     margin: 14px auto 0 auto;
 }
 
-/* Ilustraciones de Fondo */
+/* Ilustración de fondo */
 
 .hero-computers-bg {
     position: absolute;
@@ -128,7 +125,7 @@ body {
     z-index: 1;
 }
 
-/* ================= MAIN CARD CONTAINER ================= */
+/* ================= MAIN CARD ================= */
 
 .main-wrapper {
     max-width: 1280px;
@@ -248,7 +245,7 @@ body {
     transition: opacity 0.2s ease;
 }
 
-/* ================= SELECCIÓN DE LABS ================= */
+/* Selección de laboratorios */
 
 .lab-card[data-lab="lab101"].active {
     border-color: #0252cd;
@@ -301,7 +298,7 @@ body {
     opacity: 1;
 }
 
-/* ================= SECCIÓN 2 ================= */
+/* ================= SECCIÓN MODALIDAD ================= */
 
 .section2-container {
     display: grid;
@@ -373,7 +370,7 @@ body {
     color: #ffffff;
 }
 
-/* Ilustración Laptop */
+/* Ilustración */
 
 .section2-illustration {
     display: flex;
@@ -387,7 +384,7 @@ body {
     height: auto;
 }
 
-/* ================= STATUS BANNER ================= */
+/* ================= STATUS ================= */
 
 .status-banner {
     background: #eef5ff;
@@ -432,6 +429,8 @@ iframe {
     border-radius: var(--border-radius-md);
 }
 
+/* Computador decorativo */
+
 .corner-pc-illustration {
     position: absolute;
     bottom: -10px;
@@ -448,15 +447,13 @@ footer {
     font-size: 0.85rem;
 }
 
-/* ==========================================================
-   MODALES
-   ========================================================== */
+/* ================= MODALES ================= */
 
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.68);
-    backdrop-filter: blur(5px);
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -475,9 +472,9 @@ footer {
     background: #ffffff;
     border-radius: var(--border-radius-lg);
     padding: 32px;
-    max-width: 500px;
+    max-width: 460px;
     width: 90%;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
     text-align: center;
     transform: scale(0.95);
     transition: transform 0.3s ease;
@@ -503,18 +500,14 @@ footer {
     font-size: 1.3rem;
     font-weight: 700;
     color: #92400e;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .modal-text {
     font-size: 0.925rem;
     color: #475569;
     margin-bottom: 24px;
-    line-height: 1.65;
-}
-
-.modal-text strong {
-    color: #0f172a;
+    line-height: 1.6;
 }
 
 .modal-btn {
@@ -534,10 +527,10 @@ footer {
     background: #d97706;
 }
 
-/* Modal específico de información general */
+/* ================= AVISO INICIAL ================= */
 
 #info-modal .modal-content {
-    max-width: 560px;
+    max-width: 520px;
 }
 
 #info-modal .modal-icon {
@@ -549,42 +542,7 @@ footer {
     color: #9a3412;
 }
 
-.info-list {
-    text-align: left;
-    margin: 0 0 24px 0;
-    padding: 0;
-    list-style: none;
-}
-
-.info-list li {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    margin-bottom: 14px;
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: #475569;
-}
-
-.info-list li:last-child {
-    margin-bottom: 0;
-}
-
-.info-number {
-    width: 27px;
-    height: 27px;
-    min-width: 27px;
-    border-radius: 50%;
-    background: #fff7ed;
-    color: #ea580c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 0.8rem;
-}
-
-.info-list strong {
+#info-modal .modal-text strong {
     color: #0f172a;
 }
 
@@ -626,34 +584,12 @@ footer {
         align-items: flex-start;
     }
 }
-
-@media (max-width: 600px) {
-
-    .app-card {
-        padding: 24px 18px;
-    }
-
-    .hero-title-area h1 {
-        font-size: 1.7rem;
-    }
-
-    .modal-content {
-        padding: 26px 20px;
-    }
-
-    .info-list li {
-        font-size: 0.85rem;
-    }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- ==========================================================
-     HEADER
-========================================================== -->
+<!-- ================= CABECERA ================= -->
 
 <div class="hero-header">
 
@@ -688,13 +624,12 @@ footer {
             </svg>
 
             <span id="clock">
-                -- de ------ de ----, --:-- -.-
+                -- de ------ de ----, --:-- -.-.
             </span>
 
         </div>
 
     </div>
-
 
     <!-- ILUSTRACIÓN DE COMPUTADORES -->
 
@@ -780,10 +715,11 @@ footer {
 
     </div>
 
-
     <div class="hero-title-area">
 
-        <h1>Sistema de Reserva de Laboratorios</h1>
+        <h1>
+            Sistema de Reserva de Laboratorios
+        </h1>
 
         <p>
             Reserva de laboratorios de computación de forma fácil y rápida
@@ -796,9 +732,7 @@ footer {
 </div>
 
 
-<!-- ==========================================================
-     CONTENIDO PRINCIPAL
-========================================================== -->
+<!-- ================= CONTENIDO PRINCIPAL ================= -->
 
 <div class="main-wrapper">
 
@@ -898,7 +832,6 @@ footer {
 
                     </div>
 
-
                     <div class="lab-info">
 
                         <h4>
@@ -970,7 +903,6 @@ footer {
                         </svg>
 
                     </div>
-
 
                     <div class="lab-info">
 
@@ -1072,7 +1004,6 @@ footer {
 
                     </div>
 
-
                     <div class="lab-info">
 
                         <h4>
@@ -1094,9 +1025,7 @@ footer {
         </div>
 
 
-        <!-- ==================================================
-             SECCIÓN 2
-        ================================================== -->
+        <!-- SECCIÓN 2 -->
 
         <div class="section-header">
 
@@ -1190,7 +1119,6 @@ footer {
 
                     </div>
 
-
                     <div class="mode-text">
 
                         <h5>
@@ -1259,7 +1187,6 @@ footer {
 
                     </div>
 
-
                     <div class="mode-text">
 
                         <h5>
@@ -1277,7 +1204,7 @@ footer {
             </div>
 
 
-            <!-- ILUSTRACIÓN -->
+            <!-- ILUSTRACIÓN LAPTOP -->
 
             <div class="section2-illustration">
 
@@ -1357,12 +1284,59 @@ footer {
                         fill="#ffffff"
                     />
 
-                    <rect x="52" y="54" width="12" height="10" rx="2" fill="#bfdbfe"/>
-                    <rect x="68" y="54" width="12" height="10" rx="2" fill="#bfdbfe"/>
-                    <rect x="84" y="54" width="12" height="10" rx="2" fill="#2563eb"/>
-                    <rect x="100" y="54" width="12" height="10" rx="2" fill="#bfdbfe"/>
-                    <rect x="52" y="68" width="12" height="10" rx="2" fill="#bfdbfe"/>
-                    <rect x="68" y="68" width="12" height="10" rx="2" fill="#bfdbfe"/>
+                    <rect
+                        x="52"
+                        y="54"
+                        width="12"
+                        height="10"
+                        rx="2"
+                        fill="#bfdbfe"
+                    />
+
+                    <rect
+                        x="68"
+                        y="54"
+                        width="12"
+                        height="10"
+                        rx="2"
+                        fill="#bfdbfe"
+                    />
+
+                    <rect
+                        x="84"
+                        y="54"
+                        width="12"
+                        height="10"
+                        rx="2"
+                        fill="#2563eb"
+                    />
+
+                    <rect
+                        x="100"
+                        y="54"
+                        width="12"
+                        height="10"
+                        rx="2"
+                        fill="#bfdbfe"
+                    />
+
+                    <rect
+                        x="52"
+                        y="68"
+                        width="12"
+                        height="10"
+                        rx="2"
+                        fill="#bfdbfe"
+                    />
+
+                    <rect
+                        x="68"
+                        y="68"
+                        width="12"
+                        height="10"
+                        rx="2"
+                        fill="#bfdbfe"
+                    />
 
                 </svg>
 
@@ -1479,9 +1453,9 @@ footer {
 </div>
 
 
-<!-- ==========================================================
-     MODAL GENERAL - APARECE AL ABRIR EL LINK
-========================================================== -->
+<!-- =====================================================
+     MODAL AVISO INICIAL
+     ===================================================== -->
 
 <div
     id="info-modal"
@@ -1511,77 +1485,40 @@ footer {
 
 
         <h3 class="modal-title">
-            ¡Importante, por favor!
+            ¡IMPORTANTE, POR FAVOR!
         </h3>
 
 
         <p class="modal-text">
-            Para que los laboratorios puedan ser utilizados de manera
-            eficiente por todos los docentes, le pedimos tener presente
-            las siguientes recomendaciones:
+
+            <strong>
+                Si finalmente NO va a utilizar el laboratorio que reservó,
+                recuerde CANCELAR LA HORA.
+            </strong>
+
+            <br><br>
+
+            Puede hacerlo directamente desde el
+            <strong>
+                correo de confirmación de la reserva
+            </strong>,
+            para que ese horario quede disponible para que otro docente pueda utilizarlo.
+
+            <br><br>
+
+            Al finalizar la clase,
+            <strong>
+                POR FAVOR, NO OLVIDE CERRAR LAS VENTANAS DEL LABORATORIO
+            </strong>
+            antes de retirarse.
+
+            <br><br>
+
+            <strong>
+                ¡Muchas gracias por su colaboración!
+            </strong>
+
         </p>
-
-
-        <ul class="info-list">
-
-            <li>
-
-                <span class="info-number">
-                    1
-                </span>
-
-                <span>
-                    Si finalmente <strong>no va a utilizar el laboratorio
-                    que reservó, por favor cancele la hora</strong>.
-                </span>
-
-            </li>
-
-
-            <li>
-
-                <span class="info-number">
-                    2
-                </span>
-
-                <span>
-                    Puede realizar la cancelación directamente desde el
-                    <strong>correo de confirmación de la reserva</strong>,
-                    utilizando la opción correspondiente.
-                </span>
-
-            </li>
-
-
-            <li>
-
-                <span class="info-number">
-                    3
-                </span>
-
-                <span>
-                    Al cancelar una reserva que no utilizará, el horario
-                    queda nuevamente <strong>disponible para que otro
-                    docente pueda utilizarlo</strong>.
-                </span>
-
-            </li>
-
-
-            <li>
-
-                <span class="info-number">
-                    4
-                </span>
-
-                <span>
-                    Al finalizar la clase, <strong>recuerde cerrar todas
-                    las ventanas del laboratorio</strong> antes de retirarse.
-                </span>
-
-            </li>
-
-        </ul>
 
 
         <button
@@ -1596,9 +1533,9 @@ footer {
 </div>
 
 
-<!-- ==========================================================
+<!-- =====================================================
      MODAL ALERTA LABORATORIO 201
-========================================================== -->
+     ===================================================== -->
 
 <div
     id="alert-modal"
@@ -1619,7 +1556,7 @@ footer {
             >
 
                 <path
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77-1.333.192 3 1.732 3z"
                 />
 
             </svg>
@@ -1635,10 +1572,12 @@ footer {
         <p class="modal-text">
 
             Usted está seleccionando el laboratorio para niños de
-            <strong>Prekínder a 4° Básico</strong>.
+            <strong>
+                Prekínder a 4° Básico
+            </strong>.
 
-            Solo está destinado para este nivel educativo, ya que el
-            mobiliario y equipamiento están adaptados únicamente para ellos.
+            Solo está destinado para este nivel educativo, ya que el mobiliario
+            y equipamiento están adaptados únicamente para ellos.
 
         </p>
 
@@ -1655,11 +1594,11 @@ footer {
 </div>
 
 
-<!-- ==========================================================
-     JAVASCRIPT
-========================================================== -->
-
 <script>
+
+/* =====================================================
+   CONFIGURACIÓN DE LABORATORIOS
+   ===================================================== */
 
 const labsConfig = {
 
@@ -1670,10 +1609,10 @@ const labsConfig = {
         location: "Donde está oficina informática",
 
         bookingUrl:
-        "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1yijX3eqzE4lBD7uVmn_9uvflj-KlsZuXv8FAbq40IMhItIckp2FtP8kNHfnImLWlcLBQbE4GV?gv=true&color=%231e3a5f",
+            "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1yijX3eqzE4lBD7uVmn_9uvflj-KlsZuXv8FAbq40IMhItIckp2FtP8kNHfnImLWlcLBQbE4GV?gv=true&color=%231e3a5f",
 
         agendaUrl:
-        "https://calendar.google.com/calendar/embed?src=c_ca9d8af8774116818857cd9b32f6a9c8407ce014f27be3981b78ee54d537186a%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%231e3a5f"
+            "https://calendar.google.com/calendar/embed?src=c_ca9d8af8774116818857cd9b32f6a9c8407ce014f27be3981b78ee54d537186a%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%231e3a5f"
 
     },
 
@@ -1685,10 +1624,10 @@ const labsConfig = {
         location: "Al frente de Informática",
 
         bookingUrl:
-        "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true&color=%2310b981",
+            "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3NpC_fxMrUCFNd5Rq0pEFRk65xbhl6hSMPSxSO426cNTVU3BlxMiLqU1UhzfVv9WwoWDeHuV8L?gv=true&color=%2310b981",
 
         agendaUrl:
-        "https://calendar.google.com/calendar/embed?src=c_classroom6390a534%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%2310b981"
+            "https://calendar.google.com/calendar/embed?src=c_classroom6390a534%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%2310b981"
 
     },
 
@@ -1700,15 +1639,19 @@ const labsConfig = {
         location: "Área de Prebásica",
 
         bookingUrl:
-        "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true&color=%23f59e0b",
+            "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2uLcmeOQiJhIRaRnHMfGFU28OzTAw-1pvJetPbjdADUeT5oLrZdK1wZuN-AcF0RoR0A_iFTFul?gv=true&color=%23f59e0b",
 
         agendaUrl:
-        "https://calendar.google.com/calendar/embed?src=coemco.cl_g8t7m0k3n4lmut0mi4vlinsbmk%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%23f59e0b"
+            "https://calendar.google.com/calendar/embed?src=coemco.cl_g8t7m0k3n4lmut0mi4vlinsbmk%40group.calendar.google.com&ctz=America%2FSantiago&mode=WEEK&color=%23f59e0b"
 
     }
 
 };
 
+
+/* =====================================================
+   VARIABLES
+   ===================================================== */
 
 let currentLab = 'lab101';
 
@@ -1717,31 +1660,41 @@ let currentMode = 'booking';
 let pendingLabSelection = null;
 
 
-/* ==========================================================
-   MODAL GENERAL
-========================================================== */
+/* =====================================================
+   AVISO INICIAL
+   ===================================================== */
 
-function openInfoModal() {
+function showInfoModal() {
 
-    document
-        .getElementById('info-modal')
-        .classList
-        .add('active');
+    const modal = document.getElementById('info-modal');
+
+    if (!modal) return;
+
+    /*
+     * El aviso se muestra una vez por sesión del navegador.
+     * Si se desea mostrar SIEMPRE, se puede eliminar esta condición.
+     */
+
+    if (!sessionStorage.getItem('laboratorioAvisoVisto')) {
+
+        setTimeout(() => {
+
+            modal.classList.add('active');
+
+        }, 400);
+
+    }
 
 }
 
 
 function closeInfoModal() {
 
-    document
-        .getElementById('info-modal')
-        .classList
-        .remove('active');
+    const modal = document.getElementById('info-modal');
 
-    /*
-     * Guardamos que el usuario ya vio el aviso durante
-     * esta sesión del navegador.
-     */
+    if (!modal) return;
+
+    modal.classList.remove('active');
 
     sessionStorage.setItem(
         'laboratorioAvisoVisto',
@@ -1751,9 +1704,9 @@ function closeInfoModal() {
 }
 
 
-/* ==========================================================
-   SELECCIÓN DE LABORATORIO
-========================================================== */
+/* =====================================================
+   CLICK EN LABORATORIOS
+   ===================================================== */
 
 function handleLabClick(labId, cardElement) {
 
@@ -1781,6 +1734,10 @@ function handleLabClick(labId, cardElement) {
 }
 
 
+/* =====================================================
+   CERRAR MODAL LAB 201
+   ===================================================== */
+
 function closeModal() {
 
     document
@@ -1802,17 +1759,22 @@ function closeModal() {
 }
 
 
-/* ==========================================================
-   CAMBIO DE LABORATORIO
-========================================================== */
+/* =====================================================
+   SELECCIONAR LABORATORIO
+   ===================================================== */
 
-function selectLab(labId, cardElement) {
+function selectLab(
+    labId,
+    cardElement
+) {
 
     currentLab = labId;
 
     document
         .querySelectorAll('.lab-card')
-        .forEach(c => c.classList.remove('active'));
+        .forEach(c =>
+            c.classList.remove('active')
+        );
 
     cardElement.classList.add('active');
 
@@ -1821,9 +1783,9 @@ function selectLab(labId, cardElement) {
 }
 
 
-/* ==========================================================
-   CAMBIO DE MODALIDAD
-========================================================== */
+/* =====================================================
+   CAMBIAR MODALIDAD
+   ===================================================== */
 
 function switchMode(mode) {
 
@@ -1850,9 +1812,9 @@ function switchMode(mode) {
 }
 
 
-/* ==========================================================
-   ACTUALIZAR IFRAME
-========================================================== */
+/* =====================================================
+   ACTUALIZAR IFRAME Y ESTADO
+   ===================================================== */
 
 function updateUI() {
 
@@ -1869,9 +1831,7 @@ function updateUI() {
     if (currentMode === 'booking') {
 
         statusDesc.innerHTML =
-            `Modo activo: <strong>Reservar Horario</strong> en
-            <strong>${config.title}</strong>
-            (${config.location}). Selecciona un bloque disponible.`;
+            `Modo activo: <strong>Reservar Horario</strong> en <strong>${config.title}</strong> (${config.location}). Selecciona un bloque disponible.`;
 
         iframe.src =
             config.bookingUrl;
@@ -1879,9 +1839,7 @@ function updateUI() {
     } else {
 
         statusDesc.innerHTML =
-            `Modo activo: <strong>Ocupación Semanal</strong> del
-            <strong>${config.title}</strong>.
-            Consulta las reservas agendadas por otros docentes.`;
+            `Modo activo: <strong>Ocupación Semanal</strong> del <strong>${config.title}</strong>. Consulta las reservas agendadas por otros docentes.`;
 
         iframe.src =
             config.agendaUrl;
@@ -1891,14 +1849,13 @@ function updateUI() {
 }
 
 
-/* ==========================================================
+/* =====================================================
    RELOJ
-========================================================== */
+   ===================================================== */
 
 function updateClock() {
 
-    const now =
-        new Date();
+    const now = new Date();
 
     const options = {
 
@@ -1916,9 +1873,9 @@ function updateClock() {
 
     };
 
-    document
-        .getElementById("clock")
-        .textContent =
+    document.getElementById(
+        "clock"
+    ).textContent =
         now.toLocaleDateString(
             'es-CL',
             options
@@ -1927,27 +1884,18 @@ function updateClock() {
 }
 
 
-/* ==========================================================
-   INICIO DE LA PÁGINA
-========================================================== */
+/* =====================================================
+   INICIO
+   ===================================================== */
 
 window.addEventListener(
     'DOMContentLoaded',
     () => {
 
-        /*
-         * Carga inicial del laboratorio 101.
-         */
-
         selectLab(
             'lab101',
             document.querySelector('.lab-card')
         );
-
-
-        /*
-         * Actualiza el reloj.
-         */
 
         updateClock();
 
@@ -1956,25 +1904,11 @@ window.addEventListener(
             1000
         );
 
-
         /*
-         * Muestra el aviso general automáticamente
-         * solamente si todavía no fue visto durante
-         * esta sesión del navegador.
+         * Mostrar el aviso inicial
          */
 
-        if (
-            sessionStorage.getItem(
-                'laboratorioAvisoVisto'
-            ) !== 'true'
-        ) {
-
-            setTimeout(
-                openInfoModal,
-                400
-            );
-
-        }
+        showInfoModal();
 
     }
 );
@@ -1983,4 +1917,3 @@ window.addEventListener(
 
 </body>
 </html>
-```
